@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @CheckData(name = "Cinematic", threshold = -1)
-public class Cinematic extends RotationCheck {
+public final class Cinematic extends RotationCheck {
     private long lastSmooth, lastHighRate;
     private double lastDeltaYaw, lastDeltaPitch;
 
