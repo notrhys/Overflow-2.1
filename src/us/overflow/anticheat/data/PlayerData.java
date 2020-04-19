@@ -30,6 +30,7 @@ public final class PlayerData {
 
     private int standTicks;
     private float lastYaw, lastPitch;
+    private boolean onGround, lastOnGround;
 
     private double sensitivityX = checkManager.getCheck(Prediction.class).sensitivityX;
     private double sensitivityY = checkManager.getCheck(Prediction.class).sensitivityY;

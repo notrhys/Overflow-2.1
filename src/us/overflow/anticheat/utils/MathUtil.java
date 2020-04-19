@@ -1,10 +1,14 @@
 package us.overflow.anticheat.utils;
 
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.*;
 
 public final class MathUtil {
@@ -176,6 +180,25 @@ public final class MathUtil {
     public static double normalize(double val, double min, double max) {
         if (max < min) return 0;
         return (val - min) / (max - min);
+    }
+
+    public static double trim(int degree, double d) {
+        String format = "#.#";
+        for (int i = 1; i < degree; ++i) {
+            format = String.valueOf(format) + "#";
+        }
+        DecimalFormat twoDForm = new DecimalFormat(format);
+        return Double.parseDouble(twoDForm.format(d).replaceAll(",", "."));
+    }
+
+
+    public static int getPotionEffectLevel(Player player, PotionEffectType pet) {
+        for (PotionEffect pe : player.getActivePotionEffects()) {
+            if (pe.getType().getName().equalsIgnoreCase(pet.getName())) {
+                return pe.getAmplifier() + 1;
+            }
+        }
+        return 0;
     }
 
     public static double getSigmoid(double x) {
