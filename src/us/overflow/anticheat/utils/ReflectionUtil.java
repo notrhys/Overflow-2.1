@@ -103,18 +103,17 @@ public final class ReflectionUtil {
     }
 
     public static boolean onGround(final PlayerData playerData) {
-        boolean ground = false;
+        final Player player = playerData.getPlayer();
+        
+        boolean onGround = false;
 
         try {
-            final Class playerClass = playerData.getPlayer().getClass();
-            final Object handle = playerClass.getField("getHandle").get(playerClass);
-
-            ground = handle.getClass().getField("onGround").getBoolean(handle);
-        }
-        catch (Exception e) {
-            e.printStackTrace();;
+            Object handle = player.getClass().getMethod("getHandle").invoke(player);
+            onGround = handle.getClass().getField("onGround").getBoolean(handle);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        return ground;
+        return onGround;
     }
 }
