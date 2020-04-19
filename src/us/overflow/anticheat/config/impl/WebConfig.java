@@ -8,14 +8,13 @@ import us.overflow.anticheat.config.type.Config;
 import java.io.File;
 
 public final class WebConfig implements Config {
+
     private File file;
-    private final OverflowPlugin plugin = OverflowAPI.INSTANCE.getPlugin();
+    private YamlConfiguration config;
 
     @Override
     public void generate() {
         this.create();
-
-        final YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
 
         if (!config.contains("discord")) {
             config.set("discord", "");
@@ -42,7 +41,9 @@ public final class WebConfig implements Config {
     }
 
     private void create() {
-        file = new File(plugin.getDataFolder(), "web.yml");
+        final OverflowPlugin plugin = OverflowAPI.INSTANCE.getPlugin();
+
+        this.file = new File(plugin.getDataFolder(), "web.yml");
 
         if (!file.exists()) {
             try {
@@ -53,6 +54,15 @@ public final class WebConfig implements Config {
             catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+
+        this.config = new YamlConfiguration();
+
+        try {
+            config.load(file);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

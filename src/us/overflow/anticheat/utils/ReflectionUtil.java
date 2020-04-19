@@ -104,16 +104,33 @@ public final class ReflectionUtil {
 
     public static boolean onGround(final PlayerData playerData) {
         final Player player = playerData.getPlayer();
-        
+
         boolean onGround = false;
 
         try {
-            Object handle = player.getClass().getMethod("getHandle").invoke(player);
+            final Object handle = player.getClass().getMethod("getHandle").invoke(player);
+
             onGround = handle.getClass().getField("onGround").getBoolean(handle);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         return onGround;
+    }
+
+    public static double getMotionY(final PlayerData playerData) {
+        final Player player = playerData.getPlayer();
+
+        double motionY = 1.0;
+
+        try {
+            final Object handle = player.getClass().getMethod("getHandle").invoke(player);
+
+            motionY = handle.getClass().getField("motY").getDouble(handle);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return motionY;
     }
 }

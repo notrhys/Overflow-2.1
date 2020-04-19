@@ -1,4 +1,4 @@
-package us.overflow.anticheat.check.impl.combat.aimassist;
+package us.overflow.anticheat.check.impl.aimassist;
 
 import us.overflow.anticheat.alert.type.ViolationLevel;
 import us.overflow.anticheat.check.CheckData;

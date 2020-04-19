@@ -28,7 +28,7 @@ public enum OverflowAPI {
 
     private final ProcessorManager processorManager = new ProcessorManager();
     private final PlayerDataManager playerDataManager = new PlayerDataManager();
-    //private final ConfigManager configManager = new ConfigManager();
+    private final ConfigManager configManager = new ConfigManager();
     private final JudgementManager judgementManager = new JudgementManager();
 
     private final VersionHandler versionHandler = new VersionHandler();
@@ -38,20 +38,16 @@ public enum OverflowAPI {
     public void start(final OverflowPlugin plugin) {
         this.plugin = plugin;
 
-        assert plugin != null: "Overflow faced a fatal error. Contact the developers for a fix. #1";
-
         startables.add(processorManager);
         startables.add(playerDataManager);
         startables.add(judgementManager);
-        //startables.add(configManager);
+        startables.add(configManager);
         startables.forEach(Startable::start);
 
         Bukkit.getPluginManager().registerEvents(new PlayerListener(), plugin);
     }
 
-    public void shutdown(final OverflowPlugin plugin) {
-        assert plugin != null: "Overflow faced a fatal error. Contact the developers for a fix. #2";
-
+    public void shutdown() {
         this.plugin = null;
     }
 }

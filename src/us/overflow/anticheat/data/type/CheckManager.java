@@ -5,8 +5,7 @@ import com.google.common.collect.ImmutableClassToInstanceMap;
 import us.overflow.anticheat.check.Check;
 import us.overflow.anticheat.check.impl.aimassist.prediction.Cinematic;
 import us.overflow.anticheat.check.impl.aimassist.prediction.Prediction;
-import us.overflow.anticheat.check.impl.killaura.Example;
-import us.overflow.anticheat.check.impl.movement.motion.MotionA;
+import us.overflow.anticheat.check.impl.motion.MotionA;
 import us.overflow.anticheat.data.PlayerData;
 
 import java.util.Collection;

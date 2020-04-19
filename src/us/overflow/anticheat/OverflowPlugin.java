@@ -11,6 +11,6 @@ public final class OverflowPlugin extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        OverflowAPI.INSTANCE.shutdown(this);
+        OverflowAPI.INSTANCE.shutdown();
     }
 }

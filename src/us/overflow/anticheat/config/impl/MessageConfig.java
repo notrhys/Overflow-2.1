@@ -8,14 +8,13 @@ import us.overflow.anticheat.config.type.Config;
 import java.io.File;
 
 public final class MessageConfig implements Config {
+
     private File file;
-    private final OverflowPlugin plugin = OverflowAPI.INSTANCE.getPlugin();
+    private YamlConfiguration config;
 
     @Override
     public void generate() {
         this.create();
-
-        final YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
 
         if (!config.contains("messages")) {
             config.set("messages", "");
@@ -46,7 +45,9 @@ public final class MessageConfig implements Config {
     }
 
     private void create() {
-        file = new File(plugin.getDataFolder(), "messages.yml");
+        final OverflowPlugin plugin = OverflowAPI.INSTANCE.getPlugin();
+
+        this.file = new File(plugin.getDataFolder(), "messages.yml");
 
         if (!file.exists()) {
             try {
@@ -57,6 +58,15 @@ public final class MessageConfig implements Config {
             catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+
+        this.config = new YamlConfiguration();
+
+        try {
+            config.load(file);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
