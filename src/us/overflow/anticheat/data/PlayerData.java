@@ -15,7 +15,7 @@ public final class PlayerData {
     private final CheckManager checkManager = new CheckManager(this);
 
     @Setter(AccessLevel.NONE)
-    private final ActionManager actionManager = new ActionManager();
+    private final ActionManager actionManager = new ActionManager(this);
 
     @Setter(AccessLevel.NONE)
     private final ConnectionManager connectionManager = new ConnectionManager();

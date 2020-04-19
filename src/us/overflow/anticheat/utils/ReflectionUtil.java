@@ -2,6 +2,7 @@ package us.overflow.anticheat.utils;
 
 import lombok.val;
 import org.bukkit.entity.Player;
+import us.overflow.anticheat.data.PlayerData;
 
 import java.io.File;
 import java.io.IOException;
@@ -99,5 +100,21 @@ public final class ReflectionUtil {
             }
         }
         return classes;
+    }
+
+    public static boolean onGround(final PlayerData playerData) {
+        boolean ground = false;
+
+        try {
+            final Class playerClass = playerData.getPlayer().getClass();
+            final Object handle = playerClass.getField("getHandle").get(playerClass);
+
+            ground = handle.getClass().getField("onGround").getBoolean(handle);
+        }
+        catch (Exception e) {
+            e.printStackTrace();;
+        }
+
+        return ground;
     }
 }
