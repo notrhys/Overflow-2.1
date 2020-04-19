@@ -28,7 +28,7 @@ public enum OverflowAPI {
 
     private final ProcessorManager processorManager = new ProcessorManager();
     private final PlayerDataManager playerDataManager = new PlayerDataManager();
-    private final ConfigManager configManager = new ConfigManager();
+    //private final ConfigManager configManager = new ConfigManager();
     private final JudgementManager judgementManager = new JudgementManager();
 
     private final VersionHandler versionHandler = new VersionHandler();
@@ -43,7 +43,7 @@ public enum OverflowAPI {
         startables.add(processorManager);
         startables.add(playerDataManager);
         startables.add(judgementManager);
-        startables.add(configManager);
+        //startables.add(configManager);
         startables.forEach(Startable::start);
 
         Bukkit.getPluginManager().registerEvents(new PlayerListener(), plugin);

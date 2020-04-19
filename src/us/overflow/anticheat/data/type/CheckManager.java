@@ -5,6 +5,7 @@ import com.google.common.collect.ImmutableClassToInstanceMap;
 import us.overflow.anticheat.check.Check;
 import us.overflow.anticheat.check.impl.aimassist.prediction.Cinematic;
 import us.overflow.anticheat.check.impl.aimassist.prediction.Prediction;
+import us.overflow.anticheat.check.impl.killaura.Example;
 import us.overflow.anticheat.data.PlayerData;
 
 import java.util.Collection;
@@ -16,6 +17,7 @@ public final class CheckManager {
         checks = new ImmutableClassToInstanceMap.Builder<Check>()
                 .put(Cinematic.class, new Cinematic(playerData))
                 .put(Prediction.class, new Prediction(playerData))
+                .put(Example.class, new Example(playerData))
                 .build();
     }
 
