@@ -69,4 +69,20 @@ public final class MessageConfig implements Config {
             e.printStackTrace();
         }
     }
+
+    public String getAlertMessage() {
+        return config.getString("messages.alert.message");
+    }
+
+    public String getAlertBroadcastMessage() {
+        return config.getString("messages.alert.broadcast");
+    }
+
+    public String getJudgementMessage() {
+        return config.getString("messages.judgement.broadcast");
+    }
+
+    public String getJudgementStart() {
+        return config.getString("messages.judgement.start");
+    }
 }

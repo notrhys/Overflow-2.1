@@ -26,11 +26,11 @@ public final class PlayerData {
     @Setter(AccessLevel.NONE)
     private final PositionManager positionManager = new PositionManager();
 
+    private final Observable<Boolean> alerts = new Observable<>(true);
     private final Observable<Boolean> cinematic = new Observable<>(false);
 
     private int standTicks;
     private float lastYaw, lastPitch;
-    private boolean onGround, lastOnGround;
 
     private double sensitivityX = checkManager.getCheck(Prediction.class).sensitivityX;
     private double sensitivityY = checkManager.getCheck(Prediction.class).sensitivityY;
