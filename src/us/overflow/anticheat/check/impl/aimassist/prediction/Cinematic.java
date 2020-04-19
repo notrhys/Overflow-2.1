@@ -1,4 +1,4 @@
-package us.overflow.anticheat.check.impl.aimassist.cinematic;
+package us.overflow.anticheat.check.impl.aimassist.prediction;
 
 import us.overflow.anticheat.check.CheckData;
 import us.overflow.anticheat.check.type.RotationCheck;

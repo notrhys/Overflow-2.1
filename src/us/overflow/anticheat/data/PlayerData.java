@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.entity.Player;
+import us.overflow.anticheat.check.impl.aimassist.prediction.Prediction;
 import us.overflow.anticheat.data.type.*;
 
 @Getter @Setter
@@ -29,6 +30,12 @@ public final class PlayerData {
 
     private int standTicks;
     private float lastYaw, lastPitch;
+
+    private double sensitivityX = checkManager.getCheck(Prediction.class).sensitivityX;
+    private double sensitivityY = checkManager.getCheck(Prediction.class).sensitivityY;
+
+    private double mouseDeltaX = checkManager.getCheck(Prediction.class).deltaX;
+    private double mouseDeltaY = checkManager.getCheck(Prediction.class).deltaY;
 
     public PlayerData(final Player player) {
         this.player = player;

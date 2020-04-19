@@ -3,7 +3,8 @@ package us.overflow.anticheat.data.type;
 import com.google.common.collect.ClassToInstanceMap;
 import com.google.common.collect.ImmutableClassToInstanceMap;
 import us.overflow.anticheat.check.Check;
-import us.overflow.anticheat.check.impl.aimassist.cinematic.Cinematic;
+import us.overflow.anticheat.check.impl.aimassist.prediction.Cinematic;
+import us.overflow.anticheat.check.impl.aimassist.prediction.Prediction;
 import us.overflow.anticheat.data.PlayerData;
 
 import java.util.Collection;
@@ -14,6 +15,7 @@ public final class CheckManager {
     public CheckManager(final PlayerData playerData) {
         checks = new ImmutableClassToInstanceMap.Builder<Check>()
                 .put(Cinematic.class, new Cinematic(playerData))
+                .put(Prediction.class, new Prediction(playerData))
                 .build();
     }
 
