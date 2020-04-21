@@ -1,16 +1,11 @@
 package us.overflow.anticheat.alert;
 
 import lombok.RequiredArgsConstructor;
-import org.bukkit.Bukkit;
 import us.overflow.anticheat.OverflowAPI;
 import us.overflow.anticheat.alert.type.ViolationLevel;
 import us.overflow.anticheat.check.Check;
 import us.overflow.anticheat.config.impl.MessageConfig;
-import us.overflow.anticheat.data.PlayerData;
 import us.overflow.anticheat.utils.ColorUtil;
-
-import java.util.Map;
-import java.util.WeakHashMap;
 
 @RequiredArgsConstructor
 public final class Alert {

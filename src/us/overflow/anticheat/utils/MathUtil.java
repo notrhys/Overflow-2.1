@@ -159,7 +159,7 @@ public final class MathUtil {
         return Math.sqrt(varianceSquared);
     }
 
-    private static double deviationSquared(final Iterable<? extends Number> iterable) {
+    public static double deviationSquared(final Iterable<? extends Number> iterable) {
         double n = 0.0;
         int n2 = 0;
 

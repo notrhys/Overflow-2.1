@@ -11,7 +11,7 @@ public class PacketCheck extends Check<WrappedPacket> {
     }
 
     @Override
-    public void process(WrappedPacket wrappedPacket) {
+    public void process(WrappedPacket packet) {
 
     }
 }
