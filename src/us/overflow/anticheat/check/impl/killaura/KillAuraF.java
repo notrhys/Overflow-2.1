@@ -9,7 +9,7 @@ import us.overflow.anticheat.update.head.HeadRotation;
 import us.overflow.anticheat.utils.MathUtil;
 import us.overflow.anticheat.utils.Verbose;
 
-@CheckData(name = "KillAura (D)")
+@CheckData(name = "KillAura (F)")
 public final class KillAuraF extends RotationCheck {
 
     public KillAuraF(final PlayerData playerData) {

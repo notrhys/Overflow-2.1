@@ -8,7 +8,7 @@ import us.overflow.anticheat.update.RotationUpdate;
 import us.overflow.anticheat.update.head.HeadRotation;
 import us.overflow.anticheat.utils.MathUtil;
 
-@CheckData(name = "KillAura (D)")
+@CheckData(name = "KillAura (E)")
 public final class KillAuraE extends RotationCheck {
 
     public KillAuraE(final PlayerData playerData) {
