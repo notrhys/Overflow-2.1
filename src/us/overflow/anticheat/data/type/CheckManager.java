@@ -10,10 +10,7 @@ import us.overflow.anticheat.check.impl.flight.FlightB;
 import us.overflow.anticheat.check.impl.flight.FlightC;
 import us.overflow.anticheat.check.impl.invalid.InvalidA;
 import us.overflow.anticheat.check.impl.invalid.InvalidB;
-import us.overflow.anticheat.check.impl.killaura.KillAuraA;
-import us.overflow.anticheat.check.impl.killaura.KillAuraB;
-import us.overflow.anticheat.check.impl.killaura.KillAuraC;
-import us.overflow.anticheat.check.impl.killaura.KillAuraD;
+import us.overflow.anticheat.check.impl.killaura.*;
 import us.overflow.anticheat.check.impl.motion.MotionA;
 import us.overflow.anticheat.check.impl.motion.MotionB;
 import us.overflow.anticheat.check.impl.motion.MotionC;
@@ -40,6 +37,8 @@ public final class CheckManager {
                 .put(KillAuraD.class, new KillAuraD(playerData))
                 .put(InvalidA.class, new InvalidA(playerData))
                 .put(InvalidB.class, new InvalidB(playerData))
+                .put(KillAuraE.class, new KillAuraE(playerData))
+                .put(KillAuraF.class, new KillAuraF(playerData))
                 .build();
     }
 

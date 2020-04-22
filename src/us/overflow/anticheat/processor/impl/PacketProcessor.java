@@ -20,11 +20,6 @@ public final class PacketProcessor implements Processor<WrappedPacket> {
             final boolean position = wrapper.isHasPos();
             final boolean looked = wrapper.isHasLook();
 
-            if (position || looked) {
-                playerData.setLastOnGround(playerData.isOnGround());
-                playerData.setOnGround(wrapper.isOnGround());
-            }
-
             if (looked) {
                 final float yaw = wrapper.getYaw();
                 final float pitch = wrapper.getPitch();

@@ -191,6 +191,22 @@ public final class MathUtil {
         return Double.parseDouble(twoDForm.format(d).replaceAll(",", "."));
     }
 
+    public static double preciseRound(double value, int precision) {
+        int scale = (int) Math.pow(10, precision);
+        return (double) Math.round(value * scale) / scale;
+    }
+
+    public static long gcd(long current, long previous) {
+        try {
+            try {
+                return (previous <= 16384L) ? current : gcd(previous, current % previous);
+            } catch (StackOverflowError ignored2) {
+                return 100000000000L;
+            }
+        } catch (Exception ignored) {
+            return 100000000000L;
+        }
+    }
 
     public static int getPotionEffectLevel(Player player, PotionEffectType pet) {
         for (PotionEffect pe : player.getActivePotionEffects()) {

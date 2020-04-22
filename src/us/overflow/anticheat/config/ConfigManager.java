@@ -1,7 +1,7 @@
 package us.overflow.anticheat.config;
 
-import net.minecraft.util.com.google.common.collect.ClassToInstanceMap;
-import net.minecraft.util.com.google.common.collect.ImmutableClassToInstanceMap;
+import com.google.common.collect.ClassToInstanceMap;
+import com.google.common.collect.ImmutableClassToInstanceMap;
 import us.overflow.anticheat.config.impl.CheckConfig;
 import us.overflow.anticheat.config.impl.MessageConfig;
 import us.overflow.anticheat.config.impl.WebConfig;

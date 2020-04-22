@@ -10,7 +10,7 @@ import us.overflow.anticheat.utils.MathUtil;
 
 public final class InvalidA extends PacketCheck {
     private int standTicks;
-    private Location lastLocation = new Location(playerData.getPlayer().getWorld(), 0, 0, 0);
+    private Location lastLocation = null;
 
     public InvalidA(final PlayerData playerData) {
         super(playerData);
@@ -19,29 +19,35 @@ public final class InvalidA extends PacketCheck {
     @Override
     public void process(final WrappedPacket packet) {
         if (packet instanceof WrappedPacketPlayInFlying) {
-            final WrappedPacketPlayInFlying wrapper = (WrappedPacketPlayInFlying) packet;
 
-            if (wrapper.isHasPos()) {
-                standTicks = 0;
+            if (lastLocation != null) {
 
-                final Location playerLocation = playerData.getPlayer().getLocation();
+                final WrappedPacketPlayInFlying wrapper = (WrappedPacketPlayInFlying) packet;
 
-                if (playerLocation != null && lastLocation != null) {
-                    final double horizontalDistance = MathUtil.vectorDistance(playerLocation, lastLocation);
-                    final double velocityDistance = playerData.getVelocityManager().getMaxVertical() + playerData.getVelocityManager().getMaxHorizontal();
+                if (wrapper.isHasPos()) {
+                    standTicks = 0;
 
-                    if (horizontalDistance < 0.00089 && velocityDistance == 0.0 && standTicks == 0.0) {
-                        this.handleViolation().addViolation(ViolationLevel.MEDIUM).create();
+                    final Location playerLocation = playerData.getPlayer().getLocation();
+
+                    if (playerLocation != null && lastLocation != null) {
+                        final double horizontalDistance = MathUtil.vectorDistance(playerLocation, lastLocation);
+                        final double velocityDistance = playerData.getVelocityManager().getMaxVertical() + playerData.getVelocityManager().getMaxHorizontal();
+
+                        if (horizontalDistance < 0.00089 && velocityDistance == 0.0 && standTicks == 0.0) {
+                            this.handleViolation().addViolation(ViolationLevel.MEDIUM).create();
+                        }
+                    }
+
+                    this.lastLocation = playerLocation;
+                } else {
+                    final boolean invalid = standTicks > 20;
+
+                    if (invalid) {
+                        this.handleViolation().addViolation(ViolationLevel.HIGH).create();
                     }
                 }
-
-                this.lastLocation = playerLocation;
             } else {
-                final boolean invalid = standTicks > 20;
-
-                if (invalid) {
-                    this.handleViolation().addViolation(ViolationLevel.HIGH).create();
-                }
+                lastLocation = new Location(playerData.getPlayer().getWorld(), 0, 0, 0);
             }
         }
     }
