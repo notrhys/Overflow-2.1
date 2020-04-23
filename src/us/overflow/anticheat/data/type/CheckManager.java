@@ -3,6 +3,7 @@ package us.overflow.anticheat.data.type;
 import com.google.common.collect.ClassToInstanceMap;
 import com.google.common.collect.ImmutableClassToInstanceMap;
 import us.overflow.anticheat.check.Check;
+import us.overflow.anticheat.check.impl.aimassist.*;
 import us.overflow.anticheat.check.impl.aimassist.prediction.Cinematic;
 import us.overflow.anticheat.check.impl.aimassist.prediction.Prediction;
 import us.overflow.anticheat.check.impl.flight.FlightA;
@@ -39,6 +40,11 @@ public final class CheckManager {
                 .put(InvalidB.class, new InvalidB(playerData))
                 .put(KillAuraE.class, new KillAuraE(playerData))
                 .put(KillAuraF.class, new KillAuraF(playerData))
+                .put(AimAssistA.class, new AimAssistA(playerData))
+                .put(AimAssistB.class, new AimAssistB(playerData))
+                .put(AimAssistC.class, new AimAssistC(playerData))
+                .put(AimAssistD.class, new AimAssistD(playerData))
+                .put(AimAssistE.class, new AimAssistE(playerData))
                 .build();
     }
 
