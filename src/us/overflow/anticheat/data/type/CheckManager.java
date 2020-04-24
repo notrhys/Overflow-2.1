@@ -15,6 +15,7 @@ import us.overflow.anticheat.check.impl.killaura.*;
 import us.overflow.anticheat.check.impl.motion.MotionA;
 import us.overflow.anticheat.check.impl.motion.MotionB;
 import us.overflow.anticheat.check.impl.motion.MotionC;
+import us.overflow.anticheat.check.impl.motion.MotionD;
 import us.overflow.anticheat.data.PlayerData;
 
 import java.util.Collection;
@@ -29,6 +30,7 @@ public final class CheckManager {
                 .put(MotionA.class, new MotionA(playerData))
                 .put(MotionB.class, new MotionB(playerData))
                 .put(MotionC.class, new MotionC(playerData))
+                .put(MotionD.class, new MotionD(playerData))
                 .put(FlightA.class, new FlightA(playerData))
                 .put(FlightB.class, new FlightB(playerData))
                 .put(FlightC.class, new FlightC(playerData))

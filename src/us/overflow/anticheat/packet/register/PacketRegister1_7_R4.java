@@ -6,6 +6,7 @@ import org.bukkit.craftbukkit.v1_7_R4.entity.CraftPlayer;
 import us.overflow.anticheat.OverflowAPI;
 import us.overflow.anticheat.data.PlayerData;
 import us.overflow.anticheat.packet.handlers.PacketHandler1_7_R4;
+import us.overflow.anticheat.packet.type.WrappedPacket;
 
 @Getter
 public final class PacketRegister1_7_R4 {
