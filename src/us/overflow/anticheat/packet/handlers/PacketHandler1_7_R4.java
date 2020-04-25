@@ -176,6 +176,16 @@ public final class PacketHandler1_7_R4 extends PlayerConnection {
         wrapper.parse(playerData);
     }
 
+    @Override
+    public void a(final PacketPlayInHeldItemSlot packet) {
+        super.a(packet);
+
+        final int slot = packet.c();
+
+        final WrappedPacketPlayInHeldItemSlot wrapper = new WrappedPacketPlayInHeldItemSlot(slot);
+
+        wrapper.parse(playerData);
+    }
 
     @Override
     public void sendPacket(final Packet packet) {

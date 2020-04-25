@@ -183,6 +183,16 @@ public final class PacketHandler1_9_R1 extends PlayerConnection {
         wrapper.parse(playerData);
     }
 
+    @Override
+    public void a(final PacketPlayInHeldItemSlot packet) {
+        super.a(packet);
+
+        final int slot = packet.a();
+
+        final WrappedPacketPlayInHeldItemSlot wrapper = new WrappedPacketPlayInHeldItemSlot(slot);
+
+        wrapper.parse(playerData);
+    }
 
     @Override
     public void sendPacket(final Packet packet) {

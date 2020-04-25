@@ -6,6 +6,10 @@ import us.overflow.anticheat.check.Check;
 import us.overflow.anticheat.check.impl.aimassist.*;
 import us.overflow.anticheat.check.impl.aimassist.prediction.Cinematic;
 import us.overflow.anticheat.check.impl.aimassist.prediction.Prediction;
+import us.overflow.anticheat.check.impl.autoclicker.AutoClickerA;
+import us.overflow.anticheat.check.impl.autoclicker.AutoClickerB;
+import us.overflow.anticheat.check.impl.autoclicker.AutoClickerC;
+import us.overflow.anticheat.check.impl.autoclicker.AutoClickerD;
 import us.overflow.anticheat.check.impl.flight.FlightA;
 import us.overflow.anticheat.check.impl.flight.FlightB;
 import us.overflow.anticheat.check.impl.flight.FlightC;
@@ -47,6 +51,10 @@ public final class CheckManager {
                 .put(AimAssistC.class, new AimAssistC(playerData))
                 .put(AimAssistD.class, new AimAssistD(playerData))
                 .put(AimAssistE.class, new AimAssistE(playerData))
+                .put(AutoClickerA.class, new AutoClickerA(playerData))
+                .put(AutoClickerB.class, new AutoClickerB(playerData))
+                .put(AutoClickerC.class, new AutoClickerC(playerData))
+                .put(AutoClickerD.class, new AutoClickerD(playerData))
                 .build();
     }
 

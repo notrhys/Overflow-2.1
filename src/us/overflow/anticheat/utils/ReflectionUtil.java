@@ -133,4 +133,36 @@ public final class ReflectionUtil {
 
         return motionY;
     }
+
+    public static double getMotionX(final PlayerData playerData) {
+        final Player player = playerData.getPlayer();
+
+        double motionX = 1.0;
+
+        try {
+            final Object handle = player.getClass().getMethod("getHandle").invoke(player);
+
+            motionX = handle.getClass().getField("motX").getDouble(handle);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return motionX;
+    }
+
+    public static double getMotionZ(final PlayerData playerData) {
+        final Player player = playerData.getPlayer();
+
+        double motionZ = 1.0;
+
+        try {
+            final Object handle = player.getClass().getMethod("getHandle").invoke(player);
+
+            motionZ = handle.getClass().getField("motZ").getDouble(handle);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return motionZ;
+    }
 }
