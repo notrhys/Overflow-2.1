@@ -12,8 +12,6 @@ public final class Alert {
     private int level;
     private final Check check;
 
-    private final String baseAlertMessage = OverflowAPI.INSTANCE.getConfigManager().getConfig(MessageConfig.class).getAlertMessage();
-
     public Alert addViolation(final ViolationLevel violationLevel) {
         final int threshold = check.getThreshold();
         final int violation = violationLevel.getLevel();
@@ -28,6 +26,8 @@ public final class Alert {
     }
 
     public void create() {
+        final String baseAlertMessage = OverflowAPI.INSTANCE.getConfigManager().getConfig(MessageConfig.class).getAlertMessage();
+        
         final String playerName = check.getPlayerData().getPlayer().getName();
         final String checkName = check.getCheckName();
         final String violations = String.valueOf(level);
