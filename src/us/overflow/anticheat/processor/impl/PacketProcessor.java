@@ -47,6 +47,7 @@ public final class PacketProcessor implements Processor<WrappedPacket> {
                 playerData.setStandTicks(standTicks + 1);
             }
 
+            playerData.setClientTicks(playerData.getClientTicks() + 1);
             playerData.getActionManager().onFlying();
         } else if (packet instanceof WrappedPacketPlayInUseEntity) {
             final WrappedPacketPlayInUseEntity wrapper = (WrappedPacketPlayInUseEntity) packet;
