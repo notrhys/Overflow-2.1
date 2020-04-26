@@ -30,9 +30,8 @@ public final class FlightA extends PositionCheck {
 
         if (touchingAir) {
             final double deltaY = to.getY() - from.getY();
-            final double motionY = ReflectionUtil.getMotionY(playerData);
 
-            if (deltaY >= 0.0 && motionY <= 0.0 && lastGroundLocation != null) {
+            if (deltaY >= 0.0 && lastGroundLocation != null) {
                 final double horizontalDistance = MathUtil.vectorDistance(to, lastGroundLocation);
 
                 if (horizontalDistance > 5.d) {

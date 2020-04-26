@@ -21,7 +21,7 @@ public final class MessageConfig implements Config {
         }
 
         if (!config.contains("messages.alert.message")) {
-            config.set("messages.alert", "&7[&cOverFlow&7] &c%player% &7failed &c%check% &7[VL: %vl%]");
+            config.set("messages.alert.message", "&7[&cOverFlow&7] &c%player% &7failed &c%check% &7[VL: %vl%]");
         }
 
         if (!config.contains("messages.alert.broadcast")) {

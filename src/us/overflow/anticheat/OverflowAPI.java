@@ -3,6 +3,7 @@ package us.overflow.anticheat;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import us.overflow.anticheat.config.ConfigManager;
+import us.overflow.anticheat.config.impl.MessageConfig;
 import us.overflow.anticheat.data.manager.PlayerDataManager;
 import us.overflow.anticheat.judgement.JudgementManager;
 import us.overflow.anticheat.listener.PlayerListener;

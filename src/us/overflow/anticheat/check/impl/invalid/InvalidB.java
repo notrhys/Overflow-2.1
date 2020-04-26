@@ -1,12 +1,14 @@
 package us.overflow.anticheat.check.impl.invalid;
 
 import us.overflow.anticheat.alert.type.ViolationLevel;
+import us.overflow.anticheat.check.CheckData;
 import us.overflow.anticheat.check.type.PacketCheck;
 import us.overflow.anticheat.data.PlayerData;
 import us.overflow.anticheat.packet.type.WrappedPacket;
 import us.overflow.anticheat.packet.type.WrappedPacketPlayInEntityAction;
 import us.overflow.anticheat.packet.type.enums.EnumPlayerAction;
 
+@CheckData(name = "Invalid (B)")
 public final class InvalidB extends PacketCheck {
     private long lastStopSprinting;
 
