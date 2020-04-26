@@ -20,6 +20,7 @@ import us.overflow.anticheat.check.impl.motion.MotionA;
 import us.overflow.anticheat.check.impl.motion.MotionB;
 import us.overflow.anticheat.check.impl.motion.MotionC;
 import us.overflow.anticheat.check.impl.motion.MotionD;
+import us.overflow.anticheat.check.impl.timer.TimerA;
 import us.overflow.anticheat.data.PlayerData;
 
 import java.util.Collection;
@@ -55,6 +56,7 @@ public final class CheckManager {
                 .put(AutoClickerB.class, new AutoClickerB(playerData))
                 .put(AutoClickerC.class, new AutoClickerC(playerData))
                 .put(AutoClickerD.class, new AutoClickerD(playerData))
+                .put(TimerA.class, new TimerA(playerData))
                 .build();
     }
 

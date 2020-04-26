@@ -38,7 +38,10 @@ public final class PlayerData {
     private double mouseDeltaX = checkManager.getCheck(Prediction.class).deltaX;
     private double mouseDeltaY = checkManager.getCheck(Prediction.class).deltaY;
 
+    private long lastJoin;
+
     public PlayerData(final Player player) {
         this.player = player;
+        this.lastJoin = System.currentTimeMillis();
     }
 }

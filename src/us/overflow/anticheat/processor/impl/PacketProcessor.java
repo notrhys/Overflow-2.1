@@ -75,6 +75,8 @@ public final class PacketProcessor implements Processor<WrappedPacket> {
 
                 playerData.getVelocityManager().addVelocityEntry(posX, posY, posZ);
             }
+        } else if (packet instanceof WrappedPacketPlayInArmAnimation) {
+            playerData.getActionManager().onSwing();
         }
 
         //noinspection unchecked
