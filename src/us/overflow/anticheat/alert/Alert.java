@@ -5,6 +5,7 @@ import org.bukkit.Bukkit;
 import us.overflow.anticheat.OverflowAPI;
 import us.overflow.anticheat.alert.type.ViolationLevel;
 import us.overflow.anticheat.check.Check;
+import us.overflow.anticheat.config.impl.MessageConfig;
 import us.overflow.anticheat.data.PlayerData;
 import us.overflow.anticheat.utils.ColorUtil;
 
@@ -18,7 +19,7 @@ public final class Alert {
     private final List<Long> alerts = new ArrayList<>();
     private final Check check;
 
-    private final String base = ColorUtil.format("&7[&eOverFlow§7] &e%s &7failed &e%s &7[&eVL: %s&7]");
+    private final String base = OverflowAPI.INSTANCE.getConfigManager().getConfig(MessageConfig.class).getAlertMessage();
 
     /**
      *
@@ -53,10 +54,13 @@ public final class Alert {
      * This is a void so its the final statement of the method. After you create, you can't go back to prevent confusion.
      */
     public void create() {
-        final String checkName = check.getCheckName();
         final PlayerData playerData = check.getPlayerData();
 
-        final String alert = String.format(base, playerData.getPlayer().getName(), checkName, violations);
+        final String playerName = playerData.getPlayer().getName();
+        final String checkName = check.getCheckName();
+        final String violationsMessage = String.valueOf(violations);
+
+        final String alert = ColorUtil.format(base).replace("%player%", playerName).replace("%check%", checkName).replace("%vl%", violationsMessage);
 
         OverflowAPI.INSTANCE.getAlertExecutor().execute(() ->
                 Bukkit.getOnlinePlayers()
