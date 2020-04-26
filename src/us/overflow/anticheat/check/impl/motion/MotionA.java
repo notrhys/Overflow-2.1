@@ -12,6 +12,7 @@ import us.overflow.anticheat.utils.MathUtil;
 
 @CheckData(name = "Motion (A)")
 public final class MotionA extends PacketCheck {
+    private int airTicks;
 
     public MotionA(final PlayerData playerData) {
         super(playerData);
@@ -34,7 +35,6 @@ public final class MotionA extends PacketCheck {
                 final boolean clientGround = wrapper.isOnGround();
 
                 final boolean jumpBoost = playerData.getPlayer().hasPotionEffect(PotionEffectType.JUMP);
-                final boolean touchingAir = !wrapper.isOnGround() && lastOnGround;
 
                 if (jumpBoost) {
                     ++jumpPotionTicks;
@@ -42,7 +42,7 @@ public final class MotionA extends PacketCheck {
                     jumpPotionTicks = Math.max(jumpPotionTicks - 1, 0);
                 }
 
-                if (touchingAir) {
+                if (clientGround) {
                     double threshold = 0.41999998688697815F;
 
                     if (jumpPotionTicks > 0) {
