@@ -36,6 +36,8 @@ public final class AimAssistA extends RotationCheck {
                 final long duplicates = pitchSamples.size() - distinct;
 
                 if (duplicates <= 9L) {
+                    this.debug("[AA A]: " + playerData.getPlayer().getName() + " had a low duplicate number: " + duplicates);
+
                     if (++buffer > 2) {
                         this.handleViolation().addViolation(ViolationLevel.MEDIUM).create();
                     }

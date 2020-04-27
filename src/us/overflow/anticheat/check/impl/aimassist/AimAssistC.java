@@ -16,8 +16,14 @@ public final class AimAssistC extends RotationCheck {
 
     @Override
     public void process(final RotationUpdate rotationUpdate) {
+        final long now = System.currentTimeMillis();
+
         final HeadRotation from = rotationUpdate.getFrom();
         final HeadRotation to = rotationUpdate.getTo();
+
+        if (now - playerData.getLastJoin() < 1000L || playerData.getActionManager().getTeleported().get()) {
+            return;
+        }
 
         if (from == to) {
             this.handleViolation().addViolation(ViolationLevel.HIGH).create();

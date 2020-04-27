@@ -77,6 +77,8 @@ public final class PacketProcessor implements Processor<WrappedPacket> {
             }
         } else if (packet instanceof WrappedPacketPlayInArmAnimation) {
             playerData.getActionManager().onSwing();
+        } else if (packet instanceof WrappedPacketPlayOutPosition) {
+            playerData.getActionManager().onTeleport();
         }
 
         //noinspection unchecked

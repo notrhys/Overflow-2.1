@@ -16,8 +16,9 @@ public final class ActionManager {
     private final Observable<Boolean> swinging = new Observable<>(false);
     private final Observable<Boolean> digging = new Observable<>(false);
     private final Observable<Boolean> ground = new Observable<>(false);
+    private final Observable<Boolean> teleported = new Observable<>(false);
 
-    private long lastBukkitDig;
+    private long lastBukkitDig, lastTeleport;
 
     public void onFlying() {
         final long now = System.currentTimeMillis();
@@ -52,5 +53,13 @@ public final class ActionManager {
         }
 
         this.lastBukkitDig = now;
+    }
+
+    public void onTeleport() {
+        final long now = System.currentTimeMillis();
+
+        this.teleported.set(now - lastTeleport < 1000L);
+
+        this.lastTeleport = now;
     }
 }

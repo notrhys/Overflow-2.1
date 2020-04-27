@@ -28,6 +28,8 @@ public final class AimAssistB extends RotationCheck {
             final boolean attack = playerData.getActionManager().getAttacking().get();
 
             if (deltaPitch == 0.0 && !cinematic && attack) {
+                this.debug("[AA B]: " + playerData.getPlayer().getName() + " had a pitch delta value of: " + deltaPitch);
+
                 if (++streak > 10.f) {
                     this.handleViolation().addViolation(ViolationLevel.LOW).create();
                 }

@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.bukkit.Bukkit;
 import us.overflow.anticheat.config.ConfigManager;
 import us.overflow.anticheat.config.impl.MessageConfig;
+import us.overflow.anticheat.data.Observable;
 import us.overflow.anticheat.data.manager.PlayerDataManager;
 import us.overflow.anticheat.judgement.JudgementManager;
 import us.overflow.anticheat.listener.PlayerListener;
@@ -27,14 +28,16 @@ public enum OverflowAPI {
     private final Executor packetExecutor = Executors.newSingleThreadExecutor();
     private final Executor positionExecutor = Executors.newSingleThreadExecutor();
 
+    private final Observable<Boolean> debug = new Observable<>(false);
+
     private final ProcessorManager processorManager = new ProcessorManager();
     private final PlayerDataManager playerDataManager = new PlayerDataManager();
     private final ConfigManager configManager = new ConfigManager();
     private final JudgementManager judgementManager = new JudgementManager();
 
     private final VersionHandler versionHandler = new VersionHandler();
-
     private final List<Startable> startables = new ArrayList<>();
+
 
     public void start(final OverflowPlugin plugin) {
         this.plugin = plugin;

@@ -214,6 +214,16 @@ public final class PacketHandler1_12_R1 extends PlayerConnection {
             final WrappedPacketPlayOutEntityVelocity wrapper = new WrappedPacketPlayOutEntityVelocity(entityId, posX, posY, posZ);
 
             wrapper.parse(playerData);
+        } else if (packet instanceof PacketPlayOutPosition) {
+            final Class clazz = PacketPlayOutPosition.class;
+
+            final double posX = (double) ReflectionUtil.getFieldValue(clazz, "a", double.class, packet) / 32;
+            final double posY = (double) ReflectionUtil.getFieldValue(clazz, "b", double.class, packet) / 32;
+            final double posZ = (double) ReflectionUtil.getFieldValue(clazz, "c", double.class, packet) / 32;
+
+            final WrappedPacketPlayOutPosition wrapper = new WrappedPacketPlayOutPosition(posX, posY, posZ);
+
+            wrapper.parse(playerData);
         }
     }
 }

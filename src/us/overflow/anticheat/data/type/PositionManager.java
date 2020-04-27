@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.material.*;
 import us.overflow.anticheat.OverflowAPI;
 import us.overflow.anticheat.data.Observable;
+import us.overflow.anticheat.utils.BlockUtil;
 import us.overflow.anticheat.utils.Cuboid;
 
 @Getter
@@ -18,6 +19,7 @@ public final class PositionManager {
     private Observable<Boolean> touchingIllegalBlocks = new Observable<>(false);
     private Observable<Boolean> touchingFence = new Observable<>(false);
     private Observable<Boolean> touchingDoor = new Observable<>(false);
+    private Observable<Boolean> belowBlocks = new Observable<>(false);
 
     public void updatePositionFlags(final Location to) {
         final Cuboid cuboid = new Cuboid(to).expand(0.0625, 0.0625, 0.0625).move(0.0, -0.55, 0.0);
@@ -39,6 +41,7 @@ public final class PositionManager {
             final boolean touchingIllegalBlocks = cuboid.checkBlocks(to.getWorld(), material -> material.getData() == Skull.class || material.getData() == FlowerPot.class || material == Material.CAULDRON || material == Material.WATER_LILY);
             final boolean touchingFence = cuboid.checkBlocks(to.getWorld(), material -> material == Material.FENCE || material == Material.FENCE_GATE);
             final boolean touchingDoor = cuboid.checkBlocks(to.getWorld(), material -> material.getData() == Gate.class);
+            final boolean belowBlocks = BlockUtil.isOnGround(to, -2);
 
             this.touchingAir.set(touchingAir);
             this.touchingLiquid.set(touchingLiquid);
@@ -47,6 +50,7 @@ public final class PositionManager {
             this.touchingIllegalBlocks.set(touchingIllegalBlocks);
             this.touchingFence.set(touchingFence);
             this.touchingDoor.set(touchingDoor);
+            this.belowBlocks.set(belowBlocks);
         });
     }
 }
