@@ -29,7 +29,7 @@ public final class KillAuraF extends RotationCheck {
         final double roundYaw1 = Math.round(deltaYaw), roundPitch1 = Math.round(deltaPitch);
         final double roundYaw2 = MathUtil.preciseRound(deltaYaw, 1), roundPitch2 = MathUtil.preciseRound(deltaPitch, 1);
 
-        if ((deltaYaw == roundYaw1 || roundPitch1 == deltaPitch || roundYaw2 == deltaYaw || roundPitch2 == deltaPitch) && verbose.flag(6, 999L)) {
+        if (deltaYaw > 1.0 && deltaPitch > 0.7 && (deltaYaw == roundYaw1 || roundPitch1 == deltaPitch || roundYaw2 == deltaYaw || roundPitch2 == deltaPitch) && verbose.flag(6, 999L)) {
             this.handleViolation().addViolation(ViolationLevel.HIGH).create();
         }
     }
