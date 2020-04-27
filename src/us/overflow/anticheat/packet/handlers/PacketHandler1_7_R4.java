@@ -188,6 +188,17 @@ public final class PacketHandler1_7_R4 extends PlayerConnection {
     }
 
     @Override
+    public void a(PacketPlayInBlockPlace packet) {
+        super.a(packet);
+
+        final int face = packet.getFace();
+
+        final WrappedPacketPlayInBlockPlace wrapper = new WrappedPacketPlayInBlockPlace(face);
+
+        wrapper.parse(playerData);
+    }
+
+    @Override
     public void sendPacket(final Packet packet) {
         super.sendPacket(packet);
 

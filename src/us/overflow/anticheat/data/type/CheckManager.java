@@ -21,6 +21,10 @@ import us.overflow.anticheat.check.impl.motion.MotionA;
 import us.overflow.anticheat.check.impl.motion.MotionB;
 import us.overflow.anticheat.check.impl.motion.MotionC;
 import us.overflow.anticheat.check.impl.motion.MotionD;
+import us.overflow.anticheat.check.impl.scaffold.ScaffoldA;
+import us.overflow.anticheat.check.impl.scaffold.ScaffoldB;
+import us.overflow.anticheat.check.impl.scaffold.ScaffoldC;
+import us.overflow.anticheat.check.impl.speed.Speed;
 import us.overflow.anticheat.check.impl.timer.TimerA;
 import us.overflow.anticheat.data.PlayerData;
 
@@ -57,6 +61,10 @@ public final class CheckManager {
                 .put(AutoClickerB.class, new AutoClickerB(playerData))
                 .put(AutoClickerC.class, new AutoClickerC(playerData))
                 .put(AutoClickerD.class, new AutoClickerD(playerData))
+                .put(ScaffoldA.class, new ScaffoldA(playerData))
+                .put(ScaffoldB.class, new ScaffoldB(playerData))
+                .put(ScaffoldC.class, new ScaffoldC(playerData))
+                .put(Speed.class, new Speed(playerData))
                 .put(TimerA.class, new TimerA(playerData))
                 .put(KillAuraG.class, new KillAuraG(playerData))
                 .put(BadPacketsA.class, new BadPacketsA(playerData))

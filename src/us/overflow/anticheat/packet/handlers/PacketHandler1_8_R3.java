@@ -192,6 +192,17 @@ public final class PacketHandler1_8_R3 extends PlayerConnection {
         wrapper.parse(playerData);
     }
 
+    @Override
+    public void a(PacketPlayInBlockPlace packet) {
+        super.a(packet);
+
+        final int face = packet.getFace();
+
+        final WrappedPacketPlayInBlockPlace wrapper = new WrappedPacketPlayInBlockPlace(face);
+
+        wrapper.parse(playerData);
+    }
+
 
     @Override
     public void sendPacket(final Packet packet) {
