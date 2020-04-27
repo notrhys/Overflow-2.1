@@ -1,5 +1,6 @@
 package us.overflow.anticheat.alert;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Bukkit;
 import us.overflow.anticheat.OverflowAPI;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 public final class Alert {
+    @Getter
     private int violations;
 
     private final List<Long> alerts = new ArrayList<>();
