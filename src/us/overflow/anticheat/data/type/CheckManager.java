@@ -10,6 +10,7 @@ import us.overflow.anticheat.check.impl.autoclicker.AutoClickerA;
 import us.overflow.anticheat.check.impl.autoclicker.AutoClickerB;
 import us.overflow.anticheat.check.impl.autoclicker.AutoClickerC;
 import us.overflow.anticheat.check.impl.autoclicker.AutoClickerD;
+import us.overflow.anticheat.check.impl.badpackets.BadPacketsA;
 import us.overflow.anticheat.check.impl.flight.FlightA;
 import us.overflow.anticheat.check.impl.flight.FlightB;
 import us.overflow.anticheat.check.impl.flight.FlightC;
@@ -57,6 +58,8 @@ public final class CheckManager {
                 .put(AutoClickerC.class, new AutoClickerC(playerData))
                 .put(AutoClickerD.class, new AutoClickerD(playerData))
                 .put(TimerA.class, new TimerA(playerData))
+                .put(KillAuraG.class, new KillAuraG(playerData))
+                .put(BadPacketsA.class, new BadPacketsA(playerData))
                 .build();
     }
 

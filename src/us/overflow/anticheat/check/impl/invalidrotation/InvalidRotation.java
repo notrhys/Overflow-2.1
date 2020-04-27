@@ -1,6 +1,5 @@
 package us.overflow.anticheat.check.impl.invalidrotation;
 
-import org.bukkit.Location;
 import us.overflow.anticheat.alert.type.ViolationLevel;
 import us.overflow.anticheat.check.CheckData;
 import us.overflow.anticheat.check.type.RotationCheck;
