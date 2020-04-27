@@ -27,7 +27,7 @@ public final class MotionB extends PositionCheck {
             return;
         }
 
-        if (deltaY > 0.5 && motionY < 0.0) {
+        if (deltaY > 0.5 && motionY <= 0.0) {
             this.handleViolation().addViolation(ViolationLevel.MEDIUM).create();
         }
     }

@@ -12,15 +12,13 @@ import us.overflow.anticheat.utils.MathUtil;
 
 @CheckData(name = "Motion (A)")
 public final class MotionA extends PacketCheck {
-    private int airTicks;
-
     public MotionA(final PlayerData playerData) {
         super(playerData);
     }
 
     private boolean lastOnGround;
     private double lastPosY;
-    private int jumpPotionTicks;
+    private int jumpPotionTicks, buffer;
 
     @Override
     public void process(final WrappedPacket wrappedPacket) {
@@ -50,7 +48,11 @@ public final class MotionA extends PacketCheck {
                     }
 
                     if (Math.abs(deltaY) > 0.0 && ((deltaY > threshold || deltaY < threshold))) {
-                        this.handleViolation().addViolation(ViolationLevel.MEDIUM).create();
+                        if (++buffer > 1) {
+                            //this.handleViolation().addViolation(ViolationLevel.MEDIUM).create();
+                        }
+                    } else {
+                        buffer = 0;
                     }
                 }
 

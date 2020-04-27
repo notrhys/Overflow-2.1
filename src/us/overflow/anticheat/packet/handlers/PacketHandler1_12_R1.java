@@ -208,6 +208,15 @@ public final class PacketHandler1_12_R1 extends PlayerConnection {
     }
 
     @Override
+    public void a(PacketPlayInSteerVehicle packet) {
+        super.a(packet);
+
+        final WrappedPacketPlayInSteerVehicle wrapper = new WrappedPacketPlayInSteerVehicle();
+
+        wrapper.parse(playerData);
+    }
+
+    @Override
     public void sendPacket(final Packet packet) {
         super.sendPacket(packet);
 

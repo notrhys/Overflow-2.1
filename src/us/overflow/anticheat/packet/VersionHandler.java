@@ -8,6 +8,7 @@ import java.lang.reflect.Method;
 
 public final class VersionHandler {
     private String version = Bukkit.getServer().getClass().getName().split("org.bukkit.craftbukkit.")[1];
+    private Class registerClass = null;
 
     public VersionHandler() {
         if (version.endsWith(".CraftServer")) {
@@ -18,18 +19,10 @@ public final class VersionHandler {
 
     public void create(final PlayerData playerData) {
         try {
-            Class.forName("us.overflow.anticheat.packet.register.PacketRegister" + version).getConstructor(PlayerData.class).newInstance(playerData);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+            final Object object = Class.forName("us.overflow.anticheat.packet.register.PacketRegister" + version).getConstructor(PlayerData.class).newInstance(playerData);
 
-    public void sendPacket(final WrappedPacket packet) {
-        try {
-            final Class reflectionClass = Class.forName("us.overflow.anticheat.packet.register.PacketRegister" + version);
-        }
-        catch (Exception e) {
+            registerClass = object.getClass();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

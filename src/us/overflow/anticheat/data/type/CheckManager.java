@@ -10,10 +10,8 @@ import us.overflow.anticheat.check.impl.autoclicker.AutoClickerA;
 import us.overflow.anticheat.check.impl.autoclicker.AutoClickerB;
 import us.overflow.anticheat.check.impl.autoclicker.AutoClickerC;
 import us.overflow.anticheat.check.impl.autoclicker.AutoClickerD;
-import us.overflow.anticheat.check.impl.badpackets.BadPacketsA;
-import us.overflow.anticheat.check.impl.flight.FlightA;
-import us.overflow.anticheat.check.impl.flight.FlightB;
-import us.overflow.anticheat.check.impl.flight.FlightC;
+import us.overflow.anticheat.check.impl.badpackets.*;
+import us.overflow.anticheat.check.impl.flight.*;
 import us.overflow.anticheat.check.impl.invalid.InvalidA;
 import us.overflow.anticheat.check.impl.invalid.InvalidB;
 import us.overflow.anticheat.check.impl.killaura.*;
@@ -44,12 +42,15 @@ public final class CheckManager {
                 .put(FlightA.class, new FlightA(playerData))
                 .put(FlightB.class, new FlightB(playerData))
                 .put(FlightC.class, new FlightC(playerData))
+                .put(FlightD.class, new FlightD(playerData))
+                .put(FlightE.class, new FlightE(playerData))
                 .put(KillAuraA.class, new KillAuraA(playerData))
                 .put(KillAuraB.class, new KillAuraB(playerData))
                 .put(KillAuraC.class, new KillAuraC(playerData))
                 .put(KillAuraD.class, new KillAuraD(playerData))
                 .put(KillAuraE.class, new KillAuraE(playerData))
                 .put(KillAuraF.class, new KillAuraF(playerData))
+                .put(KillAuraG.class, new KillAuraG(playerData))
                 .put(InvalidA.class, new InvalidA(playerData))
                 .put(InvalidB.class, new InvalidB(playerData))
                 .put(AimAssistA.class, new AimAssistA(playerData))
@@ -64,9 +65,14 @@ public final class CheckManager {
                 .put(ScaffoldA.class, new ScaffoldA(playerData))
                 .put(ScaffoldB.class, new ScaffoldB(playerData))
                 .put(ScaffoldC.class, new ScaffoldC(playerData))
+                .put(BadPacketsA.class, new BadPacketsA(playerData))
+                .put(BadPacketsB.class, new BadPacketsB(playerData))
+                .put(BadPacketsC.class, new BadPacketsC(playerData))
+                .put(BadPacketsD.class, new BadPacketsD(playerData))
+                .put(BadPacketsE.class, new BadPacketsE(playerData))
+                .put(BadPacketsF.class, new BadPacketsF(playerData))
                 .put(Speed.class, new Speed(playerData))
                 .put(TimerA.class, new TimerA(playerData))
-                .put(KillAuraG.class, new KillAuraG(playerData))
                 .put(BadPacketsA.class, new BadPacketsA(playerData))
                 .build();
     }
