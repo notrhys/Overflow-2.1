@@ -42,7 +42,7 @@ public final class MotionA extends PacketCheck {
                     jumpPotionTicks = Math.max(jumpPotionTicks - 1, 0);
                 }
 
-                if (!clientGround) {
+                if (!clientGround && lastOnGround) {
                     double threshold = 0.41999998688697815F;
 
                     if (jumpPotionTicks > 0) {

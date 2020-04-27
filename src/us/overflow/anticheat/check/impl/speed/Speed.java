@@ -89,7 +89,7 @@ public final class Speed extends PositionCheck {
         //Refer to Block.class#195. Friction factor is 0.6 unless otherwise said by slippery objects such as ice, or bouncing objects such as slimes.
         return (to.getWorld().getBlockAt(to.clone().subtract(0.0, 1.0, 0.0)).getType()) == Material.PACKED_ICE
                 || to.getWorld().getBlockAt(to.clone().subtract(0.0, 1.0, 0.0)).getType()  == Material.ICE ? 0.9800000190734863
-                : (to.getWorld().getBlockAt(to.clone().subtract(0.0, 1.0, 0.0)).getType()) == Material.SLIME_BLOCK ? 0.800000011920929
+                : (to.getWorld().getBlockAt(to.clone().subtract(0.0, 1.0, 0.0)).getType()).name().equals("SLIME_BLOCK") ? 0.800000011920929
                 : 0.6000000238418579;
     }
 
