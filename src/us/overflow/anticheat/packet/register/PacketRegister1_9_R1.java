@@ -8,13 +8,9 @@ import us.overflow.anticheat.OverflowAPI;
 import us.overflow.anticheat.data.PlayerData;
 import us.overflow.anticheat.packet.handlers.PacketHandler1_9_R1;
 
-@Getter
 public final class PacketRegister1_9_R1 {
-    private final PlayerData playerData;
 
     public PacketRegister1_9_R1(final PlayerData playerData) {
-        this.playerData = playerData;
-
         final EntityPlayer entityPlayer = ((CraftPlayer) playerData.getPlayer()).getHandle();
 
         OverflowAPI.INSTANCE.getPacketExecutor().execute(() -> new PacketHandler1_9_R1(entityPlayer.server, entityPlayer.playerConnection.networkManager, entityPlayer, playerData));
