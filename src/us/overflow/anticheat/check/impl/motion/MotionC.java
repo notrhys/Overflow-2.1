@@ -5,12 +5,15 @@ import us.overflow.anticheat.alert.type.ViolationLevel;
 import us.overflow.anticheat.check.CheckData;
 import us.overflow.anticheat.check.type.PositionCheck;
 import us.overflow.anticheat.data.PlayerData;
+import us.overflow.anticheat.data.type.PositionManager;
 import us.overflow.anticheat.update.PositionUpdate;
 
-@CheckData(name = "Motion (C)", threshold = 10)
+@CheckData(name = "Flight (A)")
 public final class MotionC extends PositionCheck {
+
     private double lastDeltaY;
     private double buffer;
+    private int airTicks;
 
     public MotionC(final PlayerData playerData) {
         super(playerData);
@@ -18,31 +21,41 @@ public final class MotionC extends PositionCheck {
 
     @Override
     public void process(final PositionUpdate positionUpdate) {
-        final boolean touchingAir = playerData.getPositionManager().getTouchingAir().get();
-
         final Location from = positionUpdate.getFrom();
         final Location to = positionUpdate.getTo();
 
-        final double deltaY = Math.abs(to.getY() - from.getY());
+        final double deltaY = to.getY() - from.getY();
+
+        if (playerData.getVelocityManager().getMaxVertical() > 0.0) {
+            return;
+        }
+
+        final boolean touchingAir = playerData.getPositionManager().getTouchingAir().get();
 
         if (touchingAir) {
-            final double predictedY = (lastDeltaY * 0.9800000190734863) - 0.08;
+            ++airTicks;
 
-            if (Math.abs(deltaY + 0.0980000019) < 0.005) {
-                buffer = 0.0D;
-                return;
-            }
+            if (airTicks > 9) {
+                final double estimation = (lastDeltaY * 0.9800000190734863) - 0.08;
 
-            if (Math.abs(predictedY - deltaY) > 0.002) {
-                buffer += 1.5;
-
-                if (buffer > 5) {
-                    this.handleViolation().addViolation(ViolationLevel.LOW).create();
+                if (Math.abs(deltaY + 0.0980000019) < 0.005) {
+                    buffer = 0.0D;
+                    return;
                 }
-            } else {
-                buffer = Math.max(0, buffer - 1.25);
+
+                if (Math.abs(estimation - deltaY) > 0.002) {
+                    buffer += 1.5;
+
+                    if (buffer > 5) {
+                        this.handleViolation().addViolation(ViolationLevel.HIGH).create();
+                    }
+                } else {
+                    buffer = Math.max(0, buffer - 1.25);
+                }
             }
         } else {
+            airTicks = 0;
+
             buffer = Math.max(0, buffer - 10D);
         }
 
