@@ -1,6 +1,7 @@
 package us.overflow.anticheat.packet;
 
 import org.bukkit.Bukkit;
+import us.overflow.anticheat.OverflowAPI;
 import us.overflow.anticheat.data.PlayerData;
 import us.overflow.anticheat.packet.type.WrappedPacket;
 
@@ -19,7 +20,8 @@ public final class VersionHandler {
 
     public void create(final PlayerData playerData) {
         try {
-            final Object object = Class.forName("us.overflow.anticheat.packet.register.PacketRegister" + version).getConstructor(PlayerData.class).newInstance(playerData);
+            //us.overflow.anticheat.packet.register.PacketRegister - handled by anti-leak
+            final Object object = Class.forName(OverflowAPI.INSTANCE.getClassManager().getS2() + version).getConstructor(PlayerData.class).newInstance(playerData);
 
             registerClass = object.getClass();
         } catch (Exception e) {

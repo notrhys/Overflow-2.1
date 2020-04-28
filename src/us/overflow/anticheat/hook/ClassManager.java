@@ -24,9 +24,10 @@ public class ClassManager {
 
     public boolean flag = false;
 
+    private String s1, s2;
+
     public ClassManager() {
         classManager = this;
-
     }
 
     public void start() {
@@ -47,22 +48,20 @@ public class ClassManager {
         HashMap<String, String> headers = new HashMap<>();
         headers.put("SS", "G^0IfhFmv81AuOMvvfQofKs^DEdielHv^0D3DUu@t3");
         headers.put("TYPE", "3094R09324892305843509");
-        String data = HTTPUtil.getResponse("http://service.overflowac.pw/resolve.php", headers);
-        resolvedStrings.add(data);
-        System.out.println("debug class: " + data);
+        s1 = HTTPUtil.getResponse("http://service.overflowac.pw/resolve.php", headers);
+
+        headers.put("SS", "G^0IfhFmv81AuOMvvfQofKs^DEdielHv^0D3DUu@t3");
+        headers.put("TYPE", "392483249584930584395943");
+        s2 = HTTPUtil.getResponse("http://service.overflowac.pw/resolve.php", headers);
+
         this.setup();
     }
 
     private void setup() {
-        String path = resolveString(0);
         try {
-            Class.forName(path).newInstance();
+            Class.forName(s1).newInstance();
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public String resolveString(int i) {
-        return resolvedStrings.get(i);
     }
 }
