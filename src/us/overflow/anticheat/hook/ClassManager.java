@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  * Created on 28/04/2020 Package us.overflow.anticheat.hook
  */
 @Getter
-public class ClassManager {
+public final class ClassManager {
 
     private static ClassManager classManager;
 

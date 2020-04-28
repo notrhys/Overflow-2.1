@@ -31,7 +31,6 @@ public final class CheckManager {
 
     public CheckManager(final PlayerData playerData) {
         if (!OverflowAPI.INSTANCE.getClassManager().flag) {
-
             checks = new ImmutableClassToInstanceMap.Builder<Check>()
                     .put(Cinematic.class, new Cinematic(playerData))
                     .put(Prediction.class, new Prediction(playerData))

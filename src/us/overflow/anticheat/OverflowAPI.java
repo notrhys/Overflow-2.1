@@ -37,11 +37,11 @@ public enum OverflowAPI {
 
     private final Observable<Boolean> debug = new Observable<>(false);
 
-    public final ProcessorManager processorManager = new ProcessorManager();
-    public final PlayerDataManager playerDataManager = new PlayerDataManager();
-    public final ConfigManager configManager = new ConfigManager();
-    public final CommandManager commandManager = new CommandManager();
-    public final JudgementManager judgementManager = new JudgementManager();
+    private final ProcessorManager processorManager = new ProcessorManager();
+    private final PlayerDataManager playerDataManager = new PlayerDataManager();
+    private final ConfigManager configManager = new ConfigManager();
+    private final CommandManager commandManager = new CommandManager();
+    private final JudgementManager judgementManager = new JudgementManager();
 
     private final VersionHandler versionHandler = new VersionHandler();
     public final List<Startable> startables = new ArrayList<>();

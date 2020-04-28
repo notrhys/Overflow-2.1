@@ -3,6 +3,7 @@ package us.overflow.anticheat.check;
 import lombok.Getter;
 import us.overflow.anticheat.OverflowAPI;
 import us.overflow.anticheat.alert.Alert;
+import us.overflow.anticheat.config.impl.CheckConfig;
 import us.overflow.anticheat.data.PlayerData;
 
 import java.util.Deque;
@@ -17,6 +18,8 @@ public abstract class Check<T> {
     private String checkName;
     private int threshold;
 
+    private boolean enabled, autobans;
+
     private final Alert alert = new Alert(this);
 
     public Check(final PlayerData playerData) {
@@ -30,6 +33,12 @@ public abstract class Check<T> {
             this.checkName = checkData.name();
             this.threshold = checkData.threshold();
         }
+
+        final CheckConfig checkConfig = OverflowAPI.INSTANCE.getConfigManager().getConfig(CheckConfig.class);
+
+        this.threshold = checkConfig.getThreshold(this);
+        this.autobans = checkConfig.getCheckAutoban(this);
+        this.enabled = checkConfig.getCheckEnabled(this);
     }
 
     protected Alert handleViolation() {
