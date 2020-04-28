@@ -1,12 +1,14 @@
 package us.overflow.anticheat.check.impl.invalid;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import us.overflow.anticheat.alert.type.ViolationLevel;
 import us.overflow.anticheat.check.CheckData;
 import us.overflow.anticheat.check.type.PacketCheck;
 import us.overflow.anticheat.data.PlayerData;
 import us.overflow.anticheat.packet.type.WrappedPacket;
 import us.overflow.anticheat.packet.type.WrappedPacketPlayInFlying;
+import us.overflow.anticheat.utils.Cuboid;
 import us.overflow.anticheat.utils.MathUtil;
 
 @CheckData(name = "Invalid (A)")
@@ -35,7 +37,9 @@ public final class InvalidA extends PacketCheck {
                         final double horizontalDistance = MathUtil.vectorDistance(playerLocation, lastLocation);
                         final double velocityDistance = playerData.getVelocityManager().getMaxVertical() + playerData.getVelocityManager().getMaxHorizontal();
 
-                        if (horizontalDistance > 0.0 && horizontalDistance < 0.00089 && velocityDistance == 0.0 && standTicks == 0.0) {
+                        final boolean horizontallyAir = new Cuboid(playerLocation).expand(1.0, 0.0, 1.0).checkBlocks(playerLocation.getWorld(), material -> material == Material.AIR);
+
+                        if (horizontallyAir && horizontalDistance > 0.0 && horizontalDistance < 0.00089 && velocityDistance == 0.0 && standTicks == 0.0) {
                             this.handleViolation().addViolation(ViolationLevel.MEDIUM).create();
                         }
                     }
