@@ -35,13 +35,15 @@ public final class KillAuraB extends RotationCheck {
         }
 
         if (pitchSamples.size() == 20) {
+            final boolean attacked = playerData.getActionManager().getAttacking().get();
+
             final double averagePitch = pitchSamples.stream().mapToDouble(d -> d).average().orElse(0.0);
             final double deviationPitch = MathUtil.deviationSquared(pitchSamples);
 
             final double averageDelta = Math.abs(averagePitch - lastAverage);
 
             if (deviationPitch > 6.d && averageDelta > 1.d && deviationPitch < 300.f) {
-                if (++buffer > 6) {
+                if (attacked && ++buffer > 6) {
                     this.handleViolation().addViolation(ViolationLevel.LOW).create();
                 }
             } else {
