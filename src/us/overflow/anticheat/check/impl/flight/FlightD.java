@@ -35,7 +35,7 @@ public final class FlightD extends PositionCheck {
             final double horizontalDistance = MathUtil.vectorDistance(from, to);
 
             if (airTicks > 8 && deltaY >= 0.0 && horizontalDistance > 0.15) {
-                if (++horizontalBuffer > 5) {
+                if (++horizontalBuffer > 10) {
                     this.handleViolation().addViolation(ViolationLevel.MEDIUM).create();
                 }
             } else {
