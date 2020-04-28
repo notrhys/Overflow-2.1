@@ -22,7 +22,7 @@ public final class PositionManager {
     private Observable<Boolean> belowBlocks = new Observable<>(false);
 
     public void updatePositionFlags(final Location to) {
-        final Cuboid cuboid = new Cuboid(to).expand(0.0625, 0.0625, 0.0625).move(0.0, -0.55, 0.0);
+        final Cuboid cuboid = new Cuboid(to).expand(0.1, 0.1, 0.1).move(0.0, -0.55, 0.0);
 
         this.touchingAir.set(false);
         this.touchingClimbable.set(false);
@@ -34,7 +34,7 @@ public final class PositionManager {
 
         // Running on a diff thread to minimize load
         OverflowAPI.INSTANCE.getPositionExecutor().execute(() -> {
-            final boolean touchingAir = cuboid.checkBlocks(to.getWorld(), material -> material == Material.AIR);
+            final boolean touchingAir = cuboid.checkBlocks(to.getWorld(), material -> material == Material.AIR) || !BlockUtil.isOnGround(to, 1) || !BlockUtil.isOnGround(to, 2);
             final boolean touchingClimbable = cuboid.checkBlocks(to.getWorld(), material -> material == Material.VINE || material == Material.LADDER);
             final boolean touchingLiquid = cuboid.checkBlocks(to.getWorld(), material -> material == Material.LAVA || material == Material.WATER || material == Material.STATIONARY_LAVA || material == Material.STATIONARY_WATER);
             final boolean touchingHalfBlocks = cuboid.checkBlocks(to.getWorld(), material -> material.getData() == Stairs.class || material.getData() == Step.class || material.getData() == WoodenStep.class);

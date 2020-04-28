@@ -39,7 +39,7 @@ public final class TimerA extends PacketCheck {
 
                 final double timerSpeed = 50.0 / averagePacketDiff;
 
-                if (timerSpeed > 1.01) {
+                if (timerSpeed > 1.02) {
                     if (++buffer > 3) {
                         this.handleViolation().addViolation(ViolationLevel.HIGH).create();
                     }
