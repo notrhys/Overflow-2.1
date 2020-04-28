@@ -18,7 +18,7 @@ public final class ActionManager {
     private final Observable<Boolean> ground = new Observable<>(false);
     private final Observable<Boolean> teleported = new Observable<>(false);
 
-    private long lastBukkitDig, lastTeleport;
+    private long lastBukkitDig, lastTeleport, lastAttack;
 
     public void onFlying() {
         final long now = System.currentTimeMillis();
@@ -34,7 +34,10 @@ public final class ActionManager {
     }
 
     public void onAttack() {
+        final long now = System.currentTimeMillis();
+
         this.attacking.set(true);
+        this.lastAttack = now;
     }
 
     public void onSwing() {

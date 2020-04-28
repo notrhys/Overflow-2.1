@@ -24,26 +24,28 @@ public final class KillAuraB extends RotationCheck {
 
     @Override
     public void process(final RotationUpdate rotationUpdate) {
+        final long now = System.currentTimeMillis();
+
         final HeadRotation from = rotationUpdate.getFrom();
         final HeadRotation to = rotationUpdate.getTo();
 
         final float deltaYaw = Math.abs(to.getYaw() - from.getYaw());
         final float deltaPitch = Math.abs(to.getPitch() - from.getPitch());
 
-        if (deltaYaw > 0.0 && deltaPitch > 0.0 && deltaPitch < 30.f) {
+        final boolean attacked = now - playerData.getActionManager().getLastAttack() < 500L;
+
+        if (deltaYaw > 0.0 && deltaPitch > 0.0 && deltaPitch < 30.f && attacked) {
             pitchSamples.add(deltaPitch);
         }
 
         if (pitchSamples.size() == 20) {
-            final boolean attacked = playerData.getActionManager().getAttacking().get();
-
             final double averagePitch = pitchSamples.stream().mapToDouble(d -> d).average().orElse(0.0);
             final double deviationPitch = MathUtil.deviationSquared(pitchSamples);
 
             final double averageDelta = Math.abs(averagePitch - lastAverage);
 
             if (deviationPitch > 6.d && averageDelta > 1.d && deviationPitch < 300.f) {
-                if (attacked && ++buffer > 6) {
+                if (++buffer > 6) {
                     this.handleViolation().addViolation(ViolationLevel.LOW).create();
                 }
             } else {

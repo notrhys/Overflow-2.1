@@ -10,6 +10,7 @@ import us.overflow.anticheat.packet.type.WrappedPacketPlayInFlying;
 
 @CheckData(name = "Flight (B)")
 public final class FlightB extends PacketCheck {
+    private int buffer;
 
     public FlightB(final PlayerData playerData) {
         super(playerData);
@@ -25,10 +26,14 @@ public final class FlightB extends PacketCheck {
             final boolean clientGround = wrapper.isOnGround();
             final boolean serverGround = wrapper.getY() % 0.015625 == 0.0;
 
-            final boolean illegal = positionManager.getTouchingLiquid().get() || positionManager.getTouchingFence().get() || positionManager.getTouchingClimbable().get() || positionManager.getTouchingIllegalBlocks().get() || playerData.getPositionManager().getTouchingHalfBlocks().get();
+            final boolean illegal = !positionManager.getTouchingAir().get() || positionManager.getTouchingLiquid().get() || positionManager.getTouchingFence().get() || positionManager.getTouchingClimbable().get() || positionManager.getTouchingIllegalBlocks().get() || playerData.getPositionManager().getTouchingHalfBlocks().get();
 
             if (clientGround != serverGround && !illegal) {
-                this.handleViolation().addViolation(ViolationLevel.LOW).create();
+                if (++buffer > 5) {
+                    this.handleViolation().addViolation(ViolationLevel.LOW).create();
+                }
+            } else {
+                buffer = 0;
             }
         }
     }
