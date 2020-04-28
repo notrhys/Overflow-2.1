@@ -37,7 +37,7 @@ public final class PositionManager {
             final boolean touchingAir = cuboid.checkBlocks(to.getWorld(), material -> material == Material.AIR);
             final boolean touchingClimbable = cuboid.checkBlocks(to.getWorld(), material -> material == Material.VINE || material == Material.LADDER);
             final boolean touchingLiquid = cuboid.checkBlocks(to.getWorld(), material -> material == Material.LAVA || material == Material.WATER || material == Material.STATIONARY_LAVA || material == Material.STATIONARY_WATER);
-            final boolean touchingHalfBlocks = cuboid.checkBlocks(to.getWorld(), material -> material.getData() == Stairs.class || material.getData() == Step.class || material.getData() == WoodenStep.class || material == Material.STONE_SLAB2);
+            final boolean touchingHalfBlocks = cuboid.checkBlocks(to.getWorld(), material -> material.getData() == Stairs.class || material.getData() == Step.class || material.getData() == WoodenStep.class);
             final boolean touchingIllegalBlocks = cuboid.checkBlocks(to.getWorld(), material -> material.getData() == Skull.class || material.getData() == FlowerPot.class || material == Material.CAULDRON || material == Material.WATER_LILY);
             final boolean touchingFence = cuboid.checkBlocks(to.getWorld(), material -> material == Material.FENCE || material == Material.FENCE_GATE);
             final boolean touchingDoor = cuboid.checkBlocks(to.getWorld(), material -> material.getData() == Gate.class);
@@ -54,3 +54,4 @@ public final class PositionManager {
         });
     }
 }
+

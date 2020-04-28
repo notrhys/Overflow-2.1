@@ -23,8 +23,9 @@ public final class MotionC extends PositionCheck {
         final Location from = positionUpdate.getFrom();
         final Location to = positionUpdate.getTo();
 
+        final double deltaY = Math.abs(to.getY() - from.getY());
+
         if (touchingAir) {
-            final double deltaY = Math.abs(to.getY() - from.getY());
             final double predictedY = (lastDeltaY * 0.9800000190734863) - 0.08;
 
             if (Math.abs(deltaY + 0.0980000019) < 0.005) {
@@ -35,15 +36,16 @@ public final class MotionC extends PositionCheck {
             if (Math.abs(predictedY - deltaY) > 0.002) {
                 buffer += 1.5;
 
-                if (buffer > 5)
+                if (buffer > 5) {
                     this.handleViolation().addViolation(ViolationLevel.LOW).create();
+                }
             } else {
                 buffer = Math.max(0, buffer - 1.25);
             }
-
-            this.lastDeltaY = deltaY;
         } else {
             buffer = Math.max(0, buffer - 10D);
         }
+
+        this.lastDeltaY = deltaY;
     }
 }

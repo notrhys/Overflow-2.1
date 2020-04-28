@@ -2,6 +2,7 @@ package us.overflow.anticheat;
 
 import lombok.Getter;
 import org.bukkit.Bukkit;
+import us.overflow.anticheat.command.CommandManager;
 import us.overflow.anticheat.config.ConfigManager;
 import us.overflow.anticheat.config.impl.MessageConfig;
 import us.overflow.anticheat.data.Observable;
@@ -33,11 +34,11 @@ public enum OverflowAPI {
     private final ProcessorManager processorManager = new ProcessorManager();
     private final PlayerDataManager playerDataManager = new PlayerDataManager();
     private final ConfigManager configManager = new ConfigManager();
+    private final CommandManager commandManager = new CommandManager();
     private final JudgementManager judgementManager = new JudgementManager();
 
     private final VersionHandler versionHandler = new VersionHandler();
     private final List<Startable> startables = new ArrayList<>();
-
 
     public void start(final OverflowPlugin plugin) {
         this.plugin = plugin;
@@ -46,6 +47,7 @@ public enum OverflowAPI {
         startables.add(playerDataManager);
         startables.add(judgementManager);
         startables.add(configManager);
+        startables.add(commandManager);
         startables.forEach(Startable::start);
 
         Bukkit.getPluginManager().registerEvents(new PlayerListener(), plugin);

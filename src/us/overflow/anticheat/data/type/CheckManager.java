@@ -6,10 +6,7 @@ import us.overflow.anticheat.check.Check;
 import us.overflow.anticheat.check.impl.aimassist.*;
 import us.overflow.anticheat.check.impl.aimassist.prediction.Cinematic;
 import us.overflow.anticheat.check.impl.aimassist.prediction.Prediction;
-import us.overflow.anticheat.check.impl.autoclicker.AutoClickerA;
-import us.overflow.anticheat.check.impl.autoclicker.AutoClickerB;
-import us.overflow.anticheat.check.impl.autoclicker.AutoClickerC;
-import us.overflow.anticheat.check.impl.autoclicker.AutoClickerD;
+import us.overflow.anticheat.check.impl.autoclicker.*;
 import us.overflow.anticheat.check.impl.badpackets.*;
 import us.overflow.anticheat.check.impl.flight.*;
 import us.overflow.anticheat.check.impl.invalid.InvalidA;
@@ -62,6 +59,7 @@ public final class CheckManager {
                 .put(AutoClickerB.class, new AutoClickerB(playerData))
                 .put(AutoClickerC.class, new AutoClickerC(playerData))
                 .put(AutoClickerD.class, new AutoClickerD(playerData))
+                .put(AutoClickerE.class, new AutoClickerE(playerData))
                 .put(ScaffoldA.class, new ScaffoldA(playerData))
                 .put(ScaffoldB.class, new ScaffoldB(playerData))
                 .put(ScaffoldC.class, new ScaffoldC(playerData))
@@ -73,7 +71,6 @@ public final class CheckManager {
                 .put(BadPacketsF.class, new BadPacketsF(playerData))
                 .put(Speed.class, new Speed(playerData))
                 .put(TimerA.class, new TimerA(playerData))
-                .put(BadPacketsA.class, new BadPacketsA(playerData))
                 .build();
     }
 

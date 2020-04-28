@@ -1,5 +1,6 @@
 package us.overflow.anticheat.check.impl.flight;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import us.overflow.anticheat.alert.type.ViolationLevel;
 import us.overflow.anticheat.check.CheckData;
@@ -41,7 +42,7 @@ public final class FlightD extends PositionCheck {
                 horizontalBuffer = 0;
             }
 
-            if (airTicks > 9 && deltaY <= 0.089 && deltaY >= 0.0) {
+            if (airTicks > 9 && deltaY == 0.0) {
                 if (++hoverBuffer > 9) {
                     this.handleViolation().addViolation(ViolationLevel.MEDIUM).create();
                 }

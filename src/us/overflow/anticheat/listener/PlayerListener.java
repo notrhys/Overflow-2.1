@@ -14,6 +14,7 @@ import us.overflow.anticheat.OverflowAPI;
 import us.overflow.anticheat.check.type.PositionCheck;
 import us.overflow.anticheat.data.PlayerData;
 import us.overflow.anticheat.packet.VersionHandler;
+import us.overflow.anticheat.processor.impl.MovementProcessor;
 import us.overflow.anticheat.update.PositionUpdate;
 
 public final class PlayerListener implements Listener {
@@ -61,7 +62,7 @@ public final class PlayerListener implements Listener {
         }
 
         //noinspection unchecked
-        playerData.getCheckManager().getChecks().stream().filter(PositionCheck.class::isInstance).forEach(check -> check.process(positionUpdate));
+        OverflowAPI.INSTANCE.getProcessorManager().getProcessor(MovementProcessor.class).process(playerData, positionUpdate);
     }
 
     @EventHandler
