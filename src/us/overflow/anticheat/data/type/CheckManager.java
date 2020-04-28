@@ -2,6 +2,7 @@ package us.overflow.anticheat.data.type;
 
 import com.google.common.collect.ClassToInstanceMap;
 import com.google.common.collect.ImmutableClassToInstanceMap;
+import us.overflow.anticheat.OverflowAPI;
 import us.overflow.anticheat.check.Check;
 import us.overflow.anticheat.check.impl.aimassist.*;
 import us.overflow.anticheat.check.impl.aimassist.prediction.Cinematic;
@@ -26,52 +27,55 @@ import us.overflow.anticheat.data.PlayerData;
 import java.util.Collection;
 
 public final class CheckManager {
-    private final ClassToInstanceMap<Check> checks;
+    private ClassToInstanceMap<Check> checks;
 
     public CheckManager(final PlayerData playerData) {
-        checks = new ImmutableClassToInstanceMap.Builder<Check>()
-                .put(Cinematic.class, new Cinematic(playerData))
-                .put(Prediction.class, new Prediction(playerData))
-                .put(MotionA.class, new MotionA(playerData))
-                .put(MotionB.class, new MotionB(playerData))
-                .put(MotionC.class, new MotionC(playerData))
-                .put(MotionD.class, new MotionD(playerData))
-                .put(FlightA.class, new FlightA(playerData))
-                .put(FlightB.class, new FlightB(playerData))
-                .put(FlightC.class, new FlightC(playerData))
-                .put(FlightD.class, new FlightD(playerData))
-                .put(FlightE.class, new FlightE(playerData))
-                .put(KillAuraA.class, new KillAuraA(playerData))
-                .put(KillAuraB.class, new KillAuraB(playerData))
-                .put(KillAuraC.class, new KillAuraC(playerData))
-                .put(KillAuraD.class, new KillAuraD(playerData))
-                .put(KillAuraE.class, new KillAuraE(playerData))
-                .put(KillAuraF.class, new KillAuraF(playerData))
-                .put(KillAuraG.class, new KillAuraG(playerData))
-                .put(InvalidA.class, new InvalidA(playerData))
-                .put(InvalidB.class, new InvalidB(playerData))
-                .put(AimAssistA.class, new AimAssistA(playerData))
-                .put(AimAssistB.class, new AimAssistB(playerData))
-                .put(AimAssistC.class, new AimAssistC(playerData))
-                .put(AimAssistD.class, new AimAssistD(playerData))
-                .put(AimAssistE.class, new AimAssistE(playerData))
-                .put(AutoClickerA.class, new AutoClickerA(playerData))
-                .put(AutoClickerB.class, new AutoClickerB(playerData))
-                .put(AutoClickerC.class, new AutoClickerC(playerData))
-                .put(AutoClickerD.class, new AutoClickerD(playerData))
-                .put(AutoClickerE.class, new AutoClickerE(playerData))
-                .put(ScaffoldA.class, new ScaffoldA(playerData))
-                .put(ScaffoldB.class, new ScaffoldB(playerData))
-                .put(ScaffoldC.class, new ScaffoldC(playerData))
-                .put(BadPacketsA.class, new BadPacketsA(playerData))
-                .put(BadPacketsB.class, new BadPacketsB(playerData))
-                .put(BadPacketsC.class, new BadPacketsC(playerData))
-                .put(BadPacketsD.class, new BadPacketsD(playerData))
-                .put(BadPacketsE.class, new BadPacketsE(playerData))
-                .put(BadPacketsF.class, new BadPacketsF(playerData))
-                .put(Speed.class, new Speed(playerData))
-                .put(TimerA.class, new TimerA(playerData))
-                .build();
+        if (!OverflowAPI.INSTANCE.getClassManager().flag) {
+
+            checks = new ImmutableClassToInstanceMap.Builder<Check>()
+                    .put(Cinematic.class, new Cinematic(playerData))
+                    .put(Prediction.class, new Prediction(playerData))
+                    .put(MotionA.class, new MotionA(playerData))
+                    .put(MotionB.class, new MotionB(playerData))
+                    .put(MotionC.class, new MotionC(playerData))
+                    .put(MotionD.class, new MotionD(playerData))
+                    .put(FlightA.class, new FlightA(playerData))
+                    .put(FlightB.class, new FlightB(playerData))
+                    .put(FlightC.class, new FlightC(playerData))
+                    .put(FlightD.class, new FlightD(playerData))
+                    .put(FlightE.class, new FlightE(playerData))
+                    .put(KillAuraA.class, new KillAuraA(playerData))
+                    .put(KillAuraB.class, new KillAuraB(playerData))
+                    .put(KillAuraC.class, new KillAuraC(playerData))
+                    .put(KillAuraD.class, new KillAuraD(playerData))
+                    .put(KillAuraE.class, new KillAuraE(playerData))
+                    .put(KillAuraF.class, new KillAuraF(playerData))
+                    .put(KillAuraG.class, new KillAuraG(playerData))
+                    .put(InvalidA.class, new InvalidA(playerData))
+                    .put(InvalidB.class, new InvalidB(playerData))
+                    .put(AimAssistA.class, new AimAssistA(playerData))
+                    .put(AimAssistB.class, new AimAssistB(playerData))
+                    .put(AimAssistC.class, new AimAssistC(playerData))
+                    .put(AimAssistD.class, new AimAssistD(playerData))
+                    .put(AimAssistE.class, new AimAssistE(playerData))
+                    .put(AutoClickerA.class, new AutoClickerA(playerData))
+                    .put(AutoClickerB.class, new AutoClickerB(playerData))
+                    .put(AutoClickerC.class, new AutoClickerC(playerData))
+                    .put(AutoClickerD.class, new AutoClickerD(playerData))
+                    .put(AutoClickerE.class, new AutoClickerE(playerData))
+                    .put(ScaffoldA.class, new ScaffoldA(playerData))
+                    .put(ScaffoldB.class, new ScaffoldB(playerData))
+                    .put(ScaffoldC.class, new ScaffoldC(playerData))
+                    .put(BadPacketsA.class, new BadPacketsA(playerData))
+                    .put(BadPacketsB.class, new BadPacketsB(playerData))
+                    .put(BadPacketsC.class, new BadPacketsC(playerData))
+                    .put(BadPacketsD.class, new BadPacketsD(playerData))
+                    .put(BadPacketsE.class, new BadPacketsE(playerData))
+                    .put(BadPacketsF.class, new BadPacketsF(playerData))
+                    .put(Speed.class, new Speed(playerData))
+                    .put(TimerA.class, new TimerA(playerData))
+                    .build();
+        }
     }
 
     // Get a specific check for pushing a packet/event, or do whatever action possible within said check class

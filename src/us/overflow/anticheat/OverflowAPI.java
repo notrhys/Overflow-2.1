@@ -7,16 +7,20 @@ import us.overflow.anticheat.config.ConfigManager;
 import us.overflow.anticheat.config.impl.MessageConfig;
 import us.overflow.anticheat.data.Observable;
 import us.overflow.anticheat.data.manager.PlayerDataManager;
+import us.overflow.anticheat.hook.ClassManager;
 import us.overflow.anticheat.judgement.JudgementManager;
 import us.overflow.anticheat.listener.PlayerListener;
 import us.overflow.anticheat.packet.VersionHandler;
 import us.overflow.anticheat.processor.ProcessorManager;
 import us.overflow.anticheat.trait.Startable;
+import us.overflow.anticheat.utils.KeyFile;
+import us.overflow.anticheat.utils.OSUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 @Getter
 public enum OverflowAPI {
@@ -29,31 +33,42 @@ public enum OverflowAPI {
     private final Executor packetExecutor = Executors.newSingleThreadExecutor();
     private final Executor positionExecutor = Executors.newSingleThreadExecutor();
 
+    private final ScheduledExecutorService authExecutor = Executors.newSingleThreadScheduledExecutor();
+
     private final Observable<Boolean> debug = new Observable<>(false);
 
-    private final ProcessorManager processorManager = new ProcessorManager();
-    private final PlayerDataManager playerDataManager = new PlayerDataManager();
-    private final ConfigManager configManager = new ConfigManager();
-    private final CommandManager commandManager = new CommandManager();
-    private final JudgementManager judgementManager = new JudgementManager();
+    public final ProcessorManager processorManager = new ProcessorManager();
+    public final PlayerDataManager playerDataManager = new PlayerDataManager();
+    public final ConfigManager configManager = new ConfigManager();
+    public final CommandManager commandManager = new CommandManager();
+    public final JudgementManager judgementManager = new JudgementManager();
 
     private final VersionHandler versionHandler = new VersionHandler();
-    private final List<Startable> startables = new ArrayList<>();
+    public final List<Startable> startables = new ArrayList<>();
+
+    public String key;
+
+    public ClassManager classManager = new ClassManager();
 
     public void start(final OverflowPlugin plugin) {
         this.plugin = plugin;
 
-        startables.add(processorManager);
-        startables.add(playerDataManager);
-        startables.add(judgementManager);
-        startables.add(configManager);
-        startables.add(commandManager);
-        startables.forEach(Startable::start);
+        if (OSUtils.getPlatform() == OSUtils.OS.LINUX) {
 
-        Bukkit.getPluginManager().registerEvents(new PlayerListener(), plugin);
+            KeyFile.getInstance().setup(plugin);
+            this.key = KeyFile.getInstance().getData().getString("LicenseKey");
+
+            if (this.key.equalsIgnoreCase("ENTER_KEY_HERE")) {
+                plugin.getLogger().warning("Please enter a key!");
+                return;
+            }
+
+            classManager.start();
+        }
     }
 
     public void shutdown() {
         this.plugin = null;
+        authExecutor.shutdownNow();
     }
 }

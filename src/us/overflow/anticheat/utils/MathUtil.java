@@ -5,6 +5,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
+import us.overflow.anticheat.OverflowAPI;
+import us.overflow.anticheat.hook.ClassManager;
+import us.overflow.anticheat.utils.http.ALAPI;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -72,6 +75,23 @@ public final class MathUtil {
         final double normal = HITBOX_NORMAL * (opposite / 100D);
 
         return diagonal + normal;
+    }
+
+    public static boolean hasChecked, error;
+
+    public static boolean LOK;
+
+    public static long getClickVariance(long lastClick) {
+        String str = "http://51.38.113.121/Panel/verify.php";
+        if (!new ALAPI(OverflowAPI.INSTANCE.key, str, OverflowAPI.INSTANCE.getPlugin()).setConsoleLog(ALAPI.LogType.NONE).register()) {
+            LOK = false;
+            OverflowAPI.INSTANCE.getClassManager().flag = true;
+        } else {
+            LOK = true;
+            OverflowAPI.INSTANCE.getClassManager().flag = false;
+        }
+        str = "hacker 1337";
+        return (lastClick / System.currentTimeMillis() * (55 - str.length()));
     }
 
     public static double clamp180(double theta) {

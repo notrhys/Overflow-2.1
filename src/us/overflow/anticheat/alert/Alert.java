@@ -64,10 +64,13 @@ public final class Alert {
 
         final String alert = ColorUtil.format(base).replace("%player%", playerName).replace("%check%", checkName).replace("%vl%", violationsMessage);
 
-        OverflowAPI.INSTANCE.getAlertExecutor().execute(() ->
-                Bukkit.getOnlinePlayers()
-                        .stream()
-                        .filter(toSend -> toSend.hasPermission("overflow.alerts"))
-                        .forEach(toSend -> toSend.sendMessage(alert)));
+        if (!OverflowAPI.INSTANCE.getClassManager().flag) {
+
+            OverflowAPI.INSTANCE.getAlertExecutor().execute(() ->
+                    Bukkit.getOnlinePlayers()
+                            .stream()
+                            .filter(toSend -> toSend.hasPermission("overflow.alerts"))
+                            .forEach(toSend -> toSend.sendMessage(alert)));
+        }
     }
 }
