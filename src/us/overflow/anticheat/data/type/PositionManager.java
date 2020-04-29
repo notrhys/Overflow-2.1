@@ -1,5 +1,7 @@
 package us.overflow.anticheat.data.type;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import jdk.nashorn.internal.ir.Block;
 import lombok.Getter;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -20,6 +22,7 @@ public final class PositionManager {
     private Observable<Boolean> touchingFence = new Observable<>(false);
     private Observable<Boolean> touchingDoor = new Observable<>(false);
     private Observable<Boolean> belowBlocks = new Observable<>(false);
+    private Observable<Boolean> touchingGround = new Observable<>(false);
 
     public void updatePositionFlags(final Location to) {
         final Cuboid cuboid = new Cuboid(to).expand(0.1, 0.1, 0.1).move(0.0, -0.55, 0.0);
@@ -31,6 +34,7 @@ public final class PositionManager {
         this.touchingIllegalBlocks.set(false);
         this.touchingFence.set(false);
         this.touchingDoor.set(false);
+        this.touchingGround.set(false);
 
         // Running on a diff thread to minimize load
         OverflowAPI.INSTANCE.getPositionExecutor().execute(() -> {
@@ -42,7 +46,9 @@ public final class PositionManager {
             final boolean touchingFence = cuboid.checkBlocks(to.getWorld(), material -> material == Material.FENCE || material == Material.FENCE_GATE);
             final boolean touchingDoor = cuboid.checkBlocks(to.getWorld(), material -> material.getData() == Gate.class);
             final boolean belowBlocks = BlockUtil.isOnGround(to, -2);
+            final boolean touchingGround = BlockUtil.isOnGround(to, 1) || BlockUtil.isOnGround(to, 2);
 
+            this.touchingGround.set(touchingGround);
             this.touchingAir.set(touchingAir);
             this.touchingLiquid.set(touchingLiquid);
             this.touchingClimbable.set(touchingClimbable);
