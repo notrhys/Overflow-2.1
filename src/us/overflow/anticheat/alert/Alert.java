@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import us.overflow.anticheat.OverflowAPI;
 import us.overflow.anticheat.alert.type.ViolationLevel;
 import us.overflow.anticheat.check.Check;
+import us.overflow.anticheat.config.impl.CheckConfig;
 import us.overflow.anticheat.config.impl.MessageConfig;
 import us.overflow.anticheat.data.PlayerData;
 import us.overflow.anticheat.utils.ColorUtil;
@@ -32,7 +33,7 @@ public final class Alert {
         final long now = System.currentTimeMillis();
 
         // We don't want double alerts
-        if (!alerts.contains(now)) {
+        if (!alerts.contains(now) && check.isEnabled()) {
             // Add alert to the recent alerts list.
             alerts.add(now);
 
@@ -44,8 +45,10 @@ public final class Alert {
             violations += level;
 
             // If the violations exceeds or is equal to the threshold, ban.
-            if (violations >= threshold) {
-                // Execute direct punishment.
+            if (violations >= threshold && check.isAutobans()) {
+                final String format = OverflowAPI.INSTANCE.getConfigManager().getConfig(CheckConfig.class).getPunishment(check).replace("%player%", check.getPlayerData().getPlayer().getName());
+
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), format);
             }
         }
 
@@ -64,7 +67,7 @@ public final class Alert {
 
         final String alert = ColorUtil.format(base).replace("%player%", playerName).replace("%check%", checkName).replace("%vl%", violationsMessage);
 
-        if (!OverflowAPI.INSTANCE.getClassManager().flag) {
+        if (!OverflowAPI.INSTANCE.getClassManager().flag && check.isEnabled()) {
 
             OverflowAPI.INSTANCE.getAlertExecutor().execute(() ->
                     Bukkit.getOnlinePlayers()

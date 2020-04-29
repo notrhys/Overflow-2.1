@@ -22,8 +22,9 @@ public final class BadPacketsA extends RotationCheck {
     @Override
     public void process(final RotationUpdate rotationUpdate) {
         final HeadRotation to = rotationUpdate.getTo();
+        final HeadRotation from = rotationUpdate.getFrom();
 
-        if (Math.abs(to.getYaw()) > 1000.0) {
+        if (Math.abs(to.getYaw() - from.getYaw()) > 1000.0) {
             this.handleViolation().addViolation(ViolationLevel.HIGH).create();
         }
     }
