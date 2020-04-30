@@ -33,36 +33,38 @@ public final class PlayerListener implements Listener {
 
     @EventHandler
     public void onMove(final PlayerMoveEvent event) {
-        // Grab the player from the event
-        final Player player = event.getPlayer();
+        OverflowAPI.INSTANCE.getPositionExecutor().execute(() -> {
+            // Grab the player from the event
+            final Player player = event.getPlayer();
 
-        // Grab the player data from the manager
-        final PlayerData playerData = OverflowAPI.INSTANCE.getPlayerDataManager().getData(player);
+            // Grab the player data from the manager
+            final PlayerData playerData = OverflowAPI.INSTANCE.getPlayerDataManager().getData(player);
 
-        // Get the from and the to location
-        final Location from = event.getFrom();
-        final Location to = event.getTo();
+            // Get the from and the to location
+            final Location from = event.getFrom();
+            final Location to = event.getTo();
 
-        // Create the position update
-        final PositionUpdate positionUpdate = new PositionUpdate(from, to);
+            // Create the position update
+            final PositionUpdate positionUpdate = new PositionUpdate(from, to);
 
-        // Player did not move
-        if (from.distance(to) == 0.0) {
-            return;
-        }
+            // Player did not move
+            if (from.distance(to) == 0.0) {
+                return;
+            }
 
-        // Spoofable but we will have bad packets checks for all of them.
-        if (player.isInsideVehicle() || player.isFlying() || player.getAllowFlight() || player.getGameMode() == GameMode.CREATIVE) {
-            return;
-        }
+            // Spoofable but we will have bad packets checks for all of them.
+            if (player.isInsideVehicle() || player.isFlying() || player.getAllowFlight() || player.getGameMode() == GameMode.CREATIVE) {
+                return;
+            }
 
-        // We do not want checks to mess up due to player being inside an unloaded chunk
-        if (!player.getWorld().isChunkLoaded(to.getBlockX() >> 4, to.getBlockZ() >> 4)) {
-            return;
-        }
+            // We do not want checks to mess up due to player being inside an unloaded chunk
+            if (!player.getWorld().isChunkLoaded(to.getBlockX() >> 4, to.getBlockZ() >> 4)) {
+                return;
+            }
 
-        //noinspection unchecked
-        OverflowAPI.INSTANCE.getProcessorManager().getProcessor(MovementProcessor.class).process(playerData, positionUpdate);
+            //noinspection unchecked
+            OverflowAPI.INSTANCE.getProcessorManager().getProcessor(MovementProcessor.class).process(playerData, positionUpdate);
+        });
     }
 
     @EventHandler
