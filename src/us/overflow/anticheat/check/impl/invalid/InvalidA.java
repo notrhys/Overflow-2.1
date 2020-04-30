@@ -25,7 +25,6 @@ public final class InvalidA extends PacketCheck {
         if (packet instanceof WrappedPacketPlayInFlying) {
 
             if (lastLocation != null) {
-
                 final WrappedPacketPlayInFlying wrapper = (WrappedPacketPlayInFlying) packet;
 
                 if (wrapper.isHasPos()) {
