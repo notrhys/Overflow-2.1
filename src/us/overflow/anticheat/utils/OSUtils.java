@@ -3,7 +3,7 @@ package us.overflow.anticheat.utils;
 /**
  * Created by FlyCode on 31/08/2019 Package cc.flycode.OverFlow.util
  */
-public class OSUtils {
+public final class OSUtils {
     public static OS getPlatform() {
         String s = System.getProperty("os.name").toLowerCase();
         return s.contains("win") ? OS.WINDOWS : (s.contains("mac") ? OS.MACOS : (s.contains("solaris") ? OS.SOLARIS : (s.contains("sunos") ? OS.SOLARIS : (s.contains("linux") ? OS.LINUX : (s.contains("unix") ? OS.LINUX : OS.UNKNOWN)))));

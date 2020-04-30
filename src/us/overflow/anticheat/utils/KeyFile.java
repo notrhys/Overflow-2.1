@@ -8,7 +8,7 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import java.io.File;
 import java.io.IOException;
 
-public class KeyFile {
+public final class KeyFile {
 
     private KeyFile() { }
 

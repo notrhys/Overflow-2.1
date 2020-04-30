@@ -3,7 +3,7 @@ package us.overflow.anticheat.utils;
 /**
  * Created by FlyCode on 04/08/2018 Package cc.flycode.BNCP.util
  */
-public class Verbose {
+public final class Verbose {
 
     public static String licensedTo;
 

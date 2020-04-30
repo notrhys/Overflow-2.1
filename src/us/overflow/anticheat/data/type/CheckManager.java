@@ -57,6 +57,8 @@ public final class CheckManager {
                     .put(AimAssistC.class, new AimAssistC(playerData))
                     .put(AimAssistD.class, new AimAssistD(playerData))
                     .put(AimAssistE.class, new AimAssistE(playerData))
+                    .put(AimAssistF.class, new AimAssistF(playerData))
+                    .put(AimAssistG.class, new AimAssistG(playerData))
                     .put(AutoClickerA.class, new AutoClickerA(playerData))
                     .put(AutoClickerB.class, new AutoClickerB(playerData))
                     .put(AutoClickerC.class, new AutoClickerC(playerData))
