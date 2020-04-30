@@ -11,11 +11,11 @@ import us.overflow.anticheat.data.PlayerData;
 import us.overflow.anticheat.update.PositionUpdate;
 import us.overflow.anticheat.utils.ReflectionUtil;
 
-@CheckData(name = "Speed")
-public final class Speed extends PositionCheck {
+@CheckData(name = "Speed (A)")
+public final class SpeedA extends PositionCheck {
     private double previousHorizontal, blockSlipperiness;
 
-    public Speed(final PlayerData playerData) {
+    public SpeedA(final PlayerData playerData) {
         super(playerData);
     }
 

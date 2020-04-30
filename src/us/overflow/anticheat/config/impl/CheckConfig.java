@@ -5,16 +5,10 @@ import us.overflow.anticheat.OverflowAPI;
 import us.overflow.anticheat.OverflowPlugin;
 import us.overflow.anticheat.check.Check;
 import us.overflow.anticheat.check.impl.aimassist.*;
-import us.overflow.anticheat.check.impl.autoclicker.AutoClickerA;
-import us.overflow.anticheat.check.impl.autoclicker.AutoClickerB;
-import us.overflow.anticheat.check.impl.autoclicker.AutoClickerD;
-import us.overflow.anticheat.check.impl.autoclicker.AutoClickerE;
+import us.overflow.anticheat.check.impl.autoclicker.*;
 import us.overflow.anticheat.check.impl.autotool.AutoTool;
 import us.overflow.anticheat.check.impl.badpackets.*;
-import us.overflow.anticheat.check.impl.flight.FlightA;
-import us.overflow.anticheat.check.impl.flight.FlightB;
-import us.overflow.anticheat.check.impl.flight.FlightC;
-import us.overflow.anticheat.check.impl.flight.FlightD;
+import us.overflow.anticheat.check.impl.flight.*;
 import us.overflow.anticheat.check.impl.invalid.InvalidA;
 import us.overflow.anticheat.check.impl.invalid.InvalidB;
 import us.overflow.anticheat.check.impl.invalidposition.InvalidPosition;
@@ -27,7 +21,8 @@ import us.overflow.anticheat.check.impl.motion.MotionD;
 import us.overflow.anticheat.check.impl.scaffold.ScaffoldA;
 import us.overflow.anticheat.check.impl.scaffold.ScaffoldB;
 import us.overflow.anticheat.check.impl.scaffold.ScaffoldC;
-import us.overflow.anticheat.check.impl.speed.Speed;
+import us.overflow.anticheat.check.impl.speed.SpeedA;
+import us.overflow.anticheat.check.impl.speed.SpeedB;
 import us.overflow.anticheat.check.impl.timer.TimerA;
 import us.overflow.anticheat.config.type.Config;
 
@@ -41,14 +36,14 @@ public final class CheckConfig implements Config {
 
     private final Class[] checkClasses = new Class[] {
             MotionA.class, MotionB.class, MotionC.class, MotionD.class,
-            FlightA.class, FlightB.class, FlightC.class, FlightD.class,
+            FlightA.class, FlightB.class, FlightC.class, FlightD.class, FlightE.class,
             KillAuraA.class, KillAuraB.class, KillAuraC.class, KillAuraD.class, KillAuraE.class, KillAuraF.class, KillAuraG.class,
-            AutoClickerA.class, AutoClickerB.class, AutoClickerE.class, AutoClickerD.class, AutoClickerE.class,
-            AimAssistA.class, AimAssistB.class, AimAssistC.class, AimAssistD.class, AimAssistE.class,
+            AutoClickerA.class, AutoClickerB.class, AutoClickerE.class, AutoClickerD.class, AutoClickerE.class, AutoClickerF.class,
+            AimAssistA.class, AimAssistB.class, AimAssistC.class, AimAssistD.class, AimAssistE.class, AimAssistF.class, AimAssistG.class,
             BadPacketsA.class, BadPacketsB.class, BadPacketsC.class, BadPacketsD.class, BadPacketsE.class, BadPacketsF.class, BadPacketsG.class,
             ScaffoldA.class, ScaffoldB.class, ScaffoldC.class,
             InvalidA.class, InvalidB.class,
-            Speed.class,
+            SpeedA.class, SpeedB.class,
             TimerA.class,
             AutoTool.class,
             InvalidPosition.class, InvalidRotation.class,

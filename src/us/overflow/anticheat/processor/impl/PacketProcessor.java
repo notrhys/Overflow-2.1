@@ -6,6 +6,7 @@ import us.overflow.anticheat.check.type.RotationCheck;
 import us.overflow.anticheat.data.PlayerData;
 import us.overflow.anticheat.packet.type.*;
 import us.overflow.anticheat.packet.type.enums.EnumEntityUseAction;
+import us.overflow.anticheat.packet.type.enums.EnumPlayerAction;
 import us.overflow.anticheat.processor.type.Processor;
 import us.overflow.anticheat.update.RotationUpdate;
 import us.overflow.anticheat.update.head.HeadRotation;
@@ -79,6 +80,12 @@ public final class PacketProcessor implements Processor<WrappedPacket> {
             playerData.getActionManager().onSwing();
         } else if (packet instanceof WrappedPacketPlayOutPosition) {
             playerData.getActionManager().onTeleport();
+        } else  if (packet instanceof WrappedPacketPlayInEntityAction) {
+            final WrappedPacketPlayInEntityAction wrapper = (WrappedPacketPlayInEntityAction) packet;
+
+            final boolean sprinting = wrapper.getUseAction() == EnumPlayerAction.START_SPRINTING;
+
+            playerData.getSprinting().set(sprinting);
         }
 
         //noinspection unchecked

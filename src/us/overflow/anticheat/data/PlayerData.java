@@ -28,6 +28,7 @@ public final class PlayerData {
 
     private final Observable<Boolean> alerts = new Observable<>(true);
     private final Observable<Boolean> cinematic = new Observable<>(false);
+    private final Observable<Boolean> sprinting =  new Observable<>(false);
 
     private int standTicks, clientTicks;
     private float lastYaw, lastPitch;

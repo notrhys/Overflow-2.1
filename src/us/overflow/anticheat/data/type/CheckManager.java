@@ -20,7 +20,8 @@ import us.overflow.anticheat.check.impl.motion.MotionD;
 import us.overflow.anticheat.check.impl.scaffold.ScaffoldA;
 import us.overflow.anticheat.check.impl.scaffold.ScaffoldB;
 import us.overflow.anticheat.check.impl.scaffold.ScaffoldC;
-import us.overflow.anticheat.check.impl.speed.Speed;
+import us.overflow.anticheat.check.impl.speed.SpeedA;
+import us.overflow.anticheat.check.impl.speed.SpeedB;
 import us.overflow.anticheat.check.impl.timer.TimerA;
 import us.overflow.anticheat.data.PlayerData;
 
@@ -73,7 +74,8 @@ public final class CheckManager {
                     .put(BadPacketsD.class, new BadPacketsD(playerData))
                     .put(BadPacketsE.class, new BadPacketsE(playerData))
                     .put(BadPacketsF.class, new BadPacketsF(playerData))
-                    .put(Speed.class, new Speed(playerData))
+                    .put(SpeedA.class, new SpeedA(playerData))
+                    .put(SpeedB.class, new SpeedB(playerData))
                     .put(TimerA.class, new TimerA(playerData))
                     .build();
         }
