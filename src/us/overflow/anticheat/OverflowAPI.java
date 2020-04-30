@@ -8,6 +8,7 @@ import us.overflow.anticheat.config.impl.MessageConfig;
 import us.overflow.anticheat.data.Observable;
 import us.overflow.anticheat.data.manager.PlayerDataManager;
 import us.overflow.anticheat.hook.ClassManager;
+import us.overflow.anticheat.hook.DiscordManager;
 import us.overflow.anticheat.judgement.JudgementManager;
 import us.overflow.anticheat.listener.PlayerListener;
 import us.overflow.anticheat.packet.VersionHandler;
@@ -43,6 +44,8 @@ public enum OverflowAPI {
     private final CommandManager commandManager = new CommandManager();
     private final JudgementManager judgementManager = new JudgementManager();
 
+    private DiscordManager discordManager = null;
+
     private final VersionHandler versionHandler = new VersionHandler();
     public final List<Startable> startables = new ArrayList<>();
 
@@ -61,6 +64,13 @@ public enum OverflowAPI {
             if (this.key.equalsIgnoreCase("ENTER_KEY_HERE")) {
                 plugin.getLogger().warning("Please enter a key!");
                 return;
+            }
+
+            try {
+                discordManager = (DiscordManager) Class.forName("us.overflow.anticheat.hook.DiscordManager").getConstructor().newInstance();
+            }
+            catch (Exception e) {
+                discordManager = null;
             }
 
             classManager.start();

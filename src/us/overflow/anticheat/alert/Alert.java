@@ -9,6 +9,7 @@ import us.overflow.anticheat.check.Check;
 import us.overflow.anticheat.config.impl.CheckConfig;
 import us.overflow.anticheat.config.impl.MessageConfig;
 import us.overflow.anticheat.data.PlayerData;
+import us.overflow.anticheat.hook.DiscordManager;
 import us.overflow.anticheat.utils.ColorUtil;
 
 import java.util.ArrayList;
@@ -59,6 +60,8 @@ public final class Alert {
      * This is a void so its the final statement of the method. After you create, you can't go back to prevent confusion.
      */
     public void create() {
+        final DiscordManager discordManager = OverflowAPI.INSTANCE.getDiscordManager();
+
         final PlayerData playerData = check.getPlayerData();
 
         final String playerName = playerData.getPlayer().getName();
@@ -74,6 +77,10 @@ public final class Alert {
                             .stream()
                             .filter(toSend -> toSend.hasPermission("overflow.alerts"))
                             .forEach(toSend -> toSend.sendMessage(alert)));
+
+            if (discordManager != null) {
+                discordManager.log(check);
+            }
         }
     }
 }

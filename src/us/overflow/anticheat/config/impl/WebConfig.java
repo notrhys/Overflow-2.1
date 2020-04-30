@@ -65,4 +65,16 @@ public final class WebConfig implements Config {
             e.printStackTrace();
         }
     }
+
+    public String getLink() {
+        return config.getString("discord.hook");
+    }
+
+    public String getHeader() {
+        return config.getString("discord.header");
+    }
+
+    public String getBody() {
+        return config.getString("discord.body");
+    }
 }
