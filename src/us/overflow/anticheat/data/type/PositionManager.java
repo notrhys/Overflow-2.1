@@ -25,7 +25,7 @@ public final class PositionManager {
     private Observable<Boolean> touchingGround = new Observable<>(false);
 
     public void updatePositionFlags(final Location to) {
-        final Cuboid cuboid = new Cuboid(to).expand(0.1, 0.1, 0.1).move(0.0, -0.55, 0.0);
+        final Cuboid cuboid = new Cuboid(to).expand(0.0625, 0.0625, 0.0625).move(0.0, -0.55, 0.0);
 
         this.touchingAir.set(false);
         this.touchingClimbable.set(false);
