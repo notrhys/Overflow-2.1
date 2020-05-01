@@ -71,9 +71,7 @@ public final class SpeedA extends PositionCheck {
                     moveSpeed -= (this.getSpeedBoostAmplifier(playerData.getPlayer()) + 1) * .17; //from minecraft src
                 }
 
-                final double horizontal = playerData.getVelocityManager().getMaxHorizontal();
-
-                moveSpeed -= horizontal;
+                moveSpeed -= Math.sqrt(playerData.getVelocityX() * playerData.getVelocityX() + playerData.getVelocityZ() * playerData.getVelocityZ());
 
                 if (moveSpeed > speedLimit) {
                     this.handleViolation().addViolation(ViolationLevel.MEDIUM).create();
