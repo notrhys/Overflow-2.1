@@ -34,6 +34,10 @@ public final class SpeedB extends PositionCheck {
             return;
         }
 
+        if (playerData.getVelocityManager().getMaxHorizontal() > 0.0 || playerData.getVelocityManager().getMaxVertical() > 0.0) {
+            return;
+        }
+
         if (horizontalDistance > 0.005 && horizontal + vertical == 0.0) {
             double estimated = lastHorizontal * 0.91 + 0.02;
 
