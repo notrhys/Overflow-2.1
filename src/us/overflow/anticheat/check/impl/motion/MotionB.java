@@ -23,7 +23,7 @@ public final class MotionB extends PositionCheck {
         final double deltaY = to.getY() - from.getY();
         final double motionY = ReflectionUtil.getMotionY(playerData);
 
-        if (playerData.getVelocityManager().getMaxVertical() > 0.0 || playerData.getVelocityManager().getMaxHorizontal() > 0.0) {
+        if (playerData.getPositionManager().getTouchingIllegalBlocks().get() || playerData.getVelocityManager().getMaxVertical() > 0.0 || playerData.getVelocityManager().getMaxHorizontal() > 0.0) {
             return;
         }
 

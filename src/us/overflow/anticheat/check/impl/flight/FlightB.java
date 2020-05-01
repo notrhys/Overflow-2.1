@@ -26,7 +26,7 @@ public final class FlightB extends PacketCheck {
             final boolean clientGround = wrapper.isOnGround();
             final boolean serverGround = wrapper.getY() % 0.015625 == 0.0;
 
-            final boolean illegal = !positionManager.getTouchingAir().get() || positionManager.getTouchingLiquid().get() || positionManager.getTouchingFence().get() || positionManager.getTouchingClimbable().get() || positionManager.getTouchingIllegalBlocks().get() || playerData.getPositionManager().getTouchingHalfBlocks().get();
+            final boolean illegal = playerData.getPlayer().isInsideVehicle() || !positionManager.getTouchingAir().get() || positionManager.getTouchingLiquid().get() || positionManager.getTouchingFence().get() || positionManager.getTouchingClimbable().get() || positionManager.getTouchingIllegalBlocks().get() || playerData.getPositionManager().getTouchingHalfBlocks().get();
 
             if (clientGround != serverGround && !illegal) {
                 if (++buffer > 5) {
