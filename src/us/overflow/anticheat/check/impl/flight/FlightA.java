@@ -22,7 +22,7 @@ public final class FlightA extends PositionCheck {
         final Location from = positionUpdate.getFrom();
         final Location to = positionUpdate.getTo();
 
-        final boolean properMotion = ReflectionUtil.getMotionY(playerData) == 0.0;
+        final boolean properMotion = ReflectionUtil.getMotionY(playerData) > 0.0;
         final boolean touchingAir = playerData.getPositionManager().getTouchingAir().get();
 
         if (playerData.getVelocityManager().getMaxHorizontal() > 0.0 || playerData.getVelocityManager().getMaxVertical() > 0.0) {

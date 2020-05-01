@@ -27,8 +27,6 @@ public final class FlightE extends PositionCheck {
 
         final boolean touchingAir = playerData.getPositionManager().getTouchingAir().get();
 
-        Bukkit.broadcastMessage("M: " + ReflectionUtil.getMotionY(playerData));
-
         final int jumpModifier = MathUtil.getPotionEffectLevel(playerData.getPlayer(), PotionEffectType.JUMP);
 
         final double motionY = ReflectionUtil.getMotionY(playerData);
@@ -43,7 +41,7 @@ public final class FlightE extends PositionCheck {
         if (touchingAir) {
             ++airTicks;
 
-            if (airTicks > 9 && deltaY > 0.0 && motionY < 99.d) {
+            if (airTicks > 9 && deltaY > 0.0 && motionY < 0.0) {
                 total += deltaY;
 
                 if (total > jumpLimit) {

@@ -23,7 +23,7 @@ public final class VelocityB extends PositionCheck {
 
         final double deltaY = to.getY() - from.getY();
 
-        if (from.getY() % 1.0 == 0.0 && to.getY() % 1.0 > 0.0 && deltaY > 0.0 && deltaY < 0.41999998688697815D && !playerData.getPositionManager().getTouchingIllegalBlocks().get()) {
+        if (from.getY() % 1.0 == 0.0 && to.getY() % 1.0 > 0.0 && deltaY > 0.0 && deltaY < 0.41999998688697815D && !playerData.getPositionManager().getBelowBlocks().get()) {
             final double velocityY = playerData.getVelocityManager().getVelocities().stream().mapToDouble(VelocityManager.VelocitySnapshot::getVertical).min().orElse(0.0);
 
             if (velocityY > 0.0) {
