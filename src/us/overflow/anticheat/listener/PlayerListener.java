@@ -61,6 +61,10 @@ public final class PlayerListener implements Listener {
             return;
         }
 
+        if (playerData.getActionManager().getTeleported().get()) {
+            return;
+        }
+
         //noinspection unchecked
         OverflowAPI.INSTANCE.getProcessorManager().getProcessor(MovementProcessor.class).process(playerData, positionUpdate);
 
