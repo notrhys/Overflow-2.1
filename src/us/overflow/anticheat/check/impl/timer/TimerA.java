@@ -25,7 +25,7 @@ public final class TimerA extends PacketCheck {
         if (packet instanceof WrappedPacketPlayInFlying) {
             final long now = System.currentTimeMillis();
 
-            final boolean invalid = now - playerData.getLastJoin() < 1000L || playerData.getConnectionManager().getDelayed().get();
+            final boolean invalid = now - playerData.getLastJoin() < 1000L || playerData.getConnectionManager().getDelayed().get() || playerData.getActionManager().getTeleported().get();
 
             if (!invalid) {
                 delaySamples.add(now - lastFlying);

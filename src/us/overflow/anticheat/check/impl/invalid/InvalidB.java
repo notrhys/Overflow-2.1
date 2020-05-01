@@ -25,9 +25,10 @@ public final class InvalidB extends PacketCheck {
 
             if (wrapper.getUseAction() == EnumPlayerAction.START_SPRINTING) {
                 final long deltaAction = now - lastStopSprinting;
+                final boolean touchingAir = playerData.getPositionManager().getTouchingAir().get();
 
                 // Cannot sprint and un sprint in the same tick.
-                if (deltaAction < 40L) {
+                if (deltaAction < 40L && !touchingAir) {
                     this.handleViolation().addViolation(ViolationLevel.LOW).create();
                 }
             }
