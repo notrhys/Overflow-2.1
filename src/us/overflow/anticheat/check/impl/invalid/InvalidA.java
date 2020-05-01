@@ -23,8 +23,7 @@ public final class InvalidA extends PacketCheck {
     @Override
     public void process(final WrappedPacket packet) {
         if (packet instanceof WrappedPacketPlayInFlying) {
-
-            if (lastLocation != null) {
+            if (lastLocation != null && !playerData.getPositionManager().getTouchingClimbable().get()) {
                 final WrappedPacketPlayInFlying wrapper = (WrappedPacketPlayInFlying) packet;
 
                 if (wrapper.isHasPos()) {
