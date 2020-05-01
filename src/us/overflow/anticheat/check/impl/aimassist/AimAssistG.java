@@ -48,7 +48,7 @@ public final class AimAssistG extends RotationCheck {
             final double averageDeltaY = deltaYSamples.stream().mapToDouble(d -> d).average().orElse(0.0);
 
             if (averageDeltaX == 0.0 || averageDeltaY == 0.0) {
-                if (++buffer > 2) {
+                if (++buffer > 8) {
                     this.handleViolation().addViolation(ViolationLevel.HIGH).create();
                 }
             } else {
