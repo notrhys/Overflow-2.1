@@ -1,5 +1,6 @@
 package us.overflow.anticheat.check.impl.flight;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.potion.PotionEffectType;
 import us.overflow.anticheat.alert.type.ViolationLevel;
@@ -25,7 +26,8 @@ public final class FlightE extends PositionCheck {
         final Location to = positionUpdate.getTo();
 
         final boolean touchingAir = playerData.getPositionManager().getTouchingAir().get();
-        final boolean properMotion = ReflectionUtil.getMotionY(playerData) == 0.0;
+
+        Bukkit.broadcastMessage("M: " + ReflectionUtil.getMotionY(playerData));
 
         final int jumpModifier = MathUtil.getPotionEffectLevel(playerData.getPlayer(), PotionEffectType.JUMP);
 
@@ -38,7 +40,7 @@ public final class FlightE extends PositionCheck {
             return;
         }
 
-        if (touchingAir && properMotion) {
+        if (touchingAir) {
             ++airTicks;
 
             if (airTicks > 9 && deltaY > 0.0 && motionY < 99.d) {
