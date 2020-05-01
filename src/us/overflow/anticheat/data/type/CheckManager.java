@@ -23,6 +23,8 @@ import us.overflow.anticheat.check.impl.scaffold.ScaffoldC;
 import us.overflow.anticheat.check.impl.speed.SpeedA;
 import us.overflow.anticheat.check.impl.speed.SpeedB;
 import us.overflow.anticheat.check.impl.timer.TimerA;
+import us.overflow.anticheat.check.impl.velocity.VelocityA;
+import us.overflow.anticheat.check.impl.velocity.VelocityB;
 import us.overflow.anticheat.data.PlayerData;
 
 import java.util.Collection;
@@ -74,6 +76,8 @@ public final class CheckManager {
                     .put(BadPacketsD.class, new BadPacketsD(playerData))
                     .put(BadPacketsE.class, new BadPacketsE(playerData))
                     .put(BadPacketsF.class, new BadPacketsF(playerData))
+                    .put(VelocityA.class, new VelocityA(playerData))
+                    .put(VelocityB.class, new VelocityB(playerData))
                     .put(SpeedA.class, new SpeedA(playerData))
                     .put(SpeedB.class, new SpeedB(playerData))
                     .put(TimerA.class, new TimerA(playerData))

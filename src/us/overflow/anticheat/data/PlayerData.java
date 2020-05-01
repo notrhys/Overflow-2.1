@@ -29,9 +29,14 @@ public final class PlayerData {
     private final Observable<Boolean> alerts = new Observable<>(true);
     private final Observable<Boolean> cinematic = new Observable<>(false);
     private final Observable<Boolean> sprinting =  new Observable<>(false);
+    private final Observable<Boolean> velocity = new Observable<>(false);
 
     private int standTicks, clientTicks;
     private float lastYaw, lastPitch;
+
+    private double velocityX;
+    private double velocityY;
+    private double velocityZ;
 
     private double sensitivityX = checkManager.getCheck(Prediction.class).sensitivityX;
     private double sensitivityY = checkManager.getCheck(Prediction.class).sensitivityY;

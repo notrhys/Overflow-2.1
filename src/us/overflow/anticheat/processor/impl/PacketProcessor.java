@@ -74,6 +74,10 @@ public final class PacketProcessor implements Processor<WrappedPacket> {
                 final double posY = wrapper.getY();
                 final double posZ = wrapper.getZ();
 
+                playerData.setVelocityX(posX);
+                playerData.setVelocityY(posY);
+                playerData.setVelocityZ(posZ);
+
                 playerData.getVelocityManager().addVelocityEntry(posX, posY, posZ);
             }
         } else if (packet instanceof WrappedPacketPlayInArmAnimation) {
