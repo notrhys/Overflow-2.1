@@ -10,6 +10,7 @@ import us.overflow.anticheat.update.PositionUpdate;
 
 @CheckData(name = "Velocity (A)")
 public final class VelocityA extends PositionCheck {
+    private int buffer;
 
     public VelocityA(final PlayerData playerData) {
         super(playerData);
@@ -40,7 +41,11 @@ public final class VelocityA extends PositionCheck {
 
             final double vectorSubtracted = velocityVector.subtract(movementVector).length();
 
-            Bukkit.broadcastMessage("V: " + vectorSubtracted);
+            if (vectorSubtracted > 0.4) {
+                Bukkit.broadcastMessage("V: " + ++buffer);
+            } else {
+                buffer = 0;
+            }
 
             playerData.getVelocity().set(false);
         }
