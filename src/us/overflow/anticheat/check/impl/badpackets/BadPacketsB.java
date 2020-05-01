@@ -16,6 +16,7 @@ import java.util.Arrays;
 
 @CheckData(name = "BadPackets (B)")
 public final class BadPacketsB extends PacketCheck {
+    private long lastVehicle;
 
     public BadPacketsB(final PlayerData playerData) {
         super(playerData);
@@ -28,7 +29,13 @@ public final class BadPacketsB extends PacketCheck {
 
             final boolean vehicleNear = Arrays.stream(entityArray).anyMatch(entity -> entity instanceof Pig || entity instanceof Boat || entity instanceof Minecart || entity instanceof Horse);
 
-            if (!vehicleNear) {
+            if (vehicleNear) {
+                lastVehicle = System.currentTimeMillis();
+            }
+
+            final boolean invalid = System.currentTimeMillis() - lastVehicle > 1000L;
+
+            if (invalid) {
                 this.handleViolation().addViolation(ViolationLevel.HIGH).create();
 
                 playerData.getPlayer().kickPlayer("Timed Out");
