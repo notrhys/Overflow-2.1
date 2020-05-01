@@ -34,7 +34,7 @@ public final class FlightA extends PositionCheck {
             if (deltaY >= 0.0 && lastGroundLocation != null) {
                 final double horizontalDistance = MathUtil.vectorDistance(to, lastGroundLocation);
 
-                if (horizontalDistance > 5.d) {
+                if (horizontalDistance > 10.d) {
                     this.handleViolation().addViolation(ViolationLevel.MEDIUM).create();
                 }
             }

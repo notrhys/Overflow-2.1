@@ -38,7 +38,7 @@ public final class PositionManager {
 
         // Running on a diff thread to minimize load
         OverflowAPI.INSTANCE.getPositionExecutor().execute(() -> {
-            final boolean touchingAir = cuboid.checkBlocks(to.getWorld(), material -> material == Material.AIR) || !BlockUtil.isOnGround(to, 1) || !BlockUtil.isOnGround(to, 2);
+            final boolean touchingAir = cuboid.checkBlocks(to.getWorld(), material -> material == Material.AIR);
             final boolean touchingClimbable = cuboid.checkBlocks(to.getWorld(), material -> material == Material.VINE || material == Material.LADDER);
             final boolean touchingLiquid = cuboid.checkBlocks(to.getWorld(), material -> material == Material.LAVA || material == Material.WATER || material == Material.STATIONARY_LAVA || material == Material.STATIONARY_WATER);
             final boolean touchingHalfBlocks = cuboid.checkBlocks(to.getWorld(), material -> material.getData() == Stairs.class || material.getData() == Step.class || material.getData() == WoodenStep.class);
