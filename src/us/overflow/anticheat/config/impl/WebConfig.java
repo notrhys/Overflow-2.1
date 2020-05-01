@@ -32,6 +32,10 @@ public final class WebConfig implements Config {
             config.set("discord.hook", "discord.gg/web");
         }
 
+        if (!config.contains("discord.enabled")) {
+            config.set("discord.enabled", false);
+        }
+
         try {
             config.save(file);
         }
@@ -64,6 +68,10 @@ public final class WebConfig implements Config {
         catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean getEnabled() {
+        return config.getBoolean("discord.enabled");
     }
 
     public String getLink() {

@@ -5,6 +5,7 @@ import org.bukkit.Bukkit;
 import us.overflow.anticheat.command.CommandManager;
 import us.overflow.anticheat.config.ConfigManager;
 import us.overflow.anticheat.config.impl.MessageConfig;
+import us.overflow.anticheat.config.impl.WebConfig;
 import us.overflow.anticheat.data.Observable;
 import us.overflow.anticheat.data.manager.PlayerDataManager;
 import us.overflow.anticheat.hook.ClassManager;
@@ -67,7 +68,11 @@ public enum OverflowAPI {
             }
 
             try {
-                discordManager = (DiscordManager) Class.forName("us.overflow.anticheat.hook.DiscordManager").getConstructor().newInstance();
+                if (configManager.getConfig(WebConfig.class).getEnabled()) {
+                    discordManager = (DiscordManager) Class.forName("us.overflow.anticheat.hook.DiscordManager").getConstructor().newInstance();
+                } else {
+                    discordManager = null;
+                }
             }
             catch (Exception e) {
                 discordManager = null;
