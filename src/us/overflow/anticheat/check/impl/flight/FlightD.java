@@ -8,6 +8,7 @@ import us.overflow.anticheat.check.type.PositionCheck;
 import us.overflow.anticheat.data.PlayerData;
 import us.overflow.anticheat.update.PositionUpdate;
 import us.overflow.anticheat.utils.MathUtil;
+import us.overflow.anticheat.utils.ReflectionUtil;
 
 @CheckData(name = "Flight (D)")
 public final class FlightD extends PositionCheck {
@@ -23,12 +24,13 @@ public final class FlightD extends PositionCheck {
         final Location to = positionUpdate.getTo();
 
         final boolean touchingAir = playerData.getPositionManager().getTouchingAir().get();
+        final boolean properMotion = ReflectionUtil.getMotionY(playerData) == 0.0;
 
         if (playerData.getVelocityManager().getMaxHorizontal() > 0.0 || playerData.getVelocityManager().getMaxVertical() > 0.0) {
             return;
         }
 
-        if (touchingAir) {
+        if (touchingAir && properMotion) {
             ++airTicks;
 
             final double deltaY = to.getY() - from.getY();

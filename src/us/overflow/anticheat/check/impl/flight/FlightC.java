@@ -6,6 +6,7 @@ import us.overflow.anticheat.check.CheckData;
 import us.overflow.anticheat.check.type.PositionCheck;
 import us.overflow.anticheat.data.PlayerData;
 import us.overflow.anticheat.update.PositionUpdate;
+import us.overflow.anticheat.utils.ReflectionUtil;
 
 @CheckData(name = "Flight (C)")
 public final class FlightC extends PositionCheck {
@@ -33,10 +34,11 @@ public final class FlightC extends PositionCheck {
         final double deltaAcceleration = Math.abs(acceleration - lastAcceleration);
 
         // Making sure the player is only touching air and no other blocks to prevent false flags
-        final boolean touchingAir = playerData.getPositionManager().getTouchingAir().get() || to.getY() % 0.015625 != 0.0;
+        final boolean touchingAir = (playerData.getPositionManager().getTouchingAir().get() || to.getY() % 0.015625 != 0.0) && !playerData.getPositionManager().getBelowBlocks().get();
+        final boolean properMotion = ReflectionUtil.getMotionY(playerData) == 0.0;
 
         // If the player isn't touching any blocks / isn't on ground
-        if (touchingAir) {
+        if (touchingAir && properMotion) {
             ++airTicks;
 
             // Invalid actions into booleans, we will use as the checks layer
