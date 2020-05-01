@@ -49,7 +49,7 @@ public final class AimAssistG extends RotationCheck {
 
             if (averageDeltaX == 0.0 && averageDeltaY == 0.0) {
                 if (++buffer > 8) {
-                    //this.handleViolation().addViolation(ViolationLevel.HIGH).create();
+                    this.handleViolation().addViolation(ViolationLevel.HIGH).create();
                 }
             } else {
                 buffer = 0;

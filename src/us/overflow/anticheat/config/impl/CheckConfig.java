@@ -5,6 +5,7 @@ import us.overflow.anticheat.OverflowAPI;
 import us.overflow.anticheat.OverflowPlugin;
 import us.overflow.anticheat.check.Check;
 import us.overflow.anticheat.check.impl.aimassist.*;
+import us.overflow.anticheat.check.impl.aimassist.prediction.Prediction;
 import us.overflow.anticheat.check.impl.autoclicker.*;
 import us.overflow.anticheat.check.impl.autotool.AutoTool;
 import us.overflow.anticheat.check.impl.badpackets.*;
@@ -47,6 +48,7 @@ public final class CheckConfig implements Config {
             TimerA.class,
             AutoTool.class,
             InvalidPosition.class, InvalidRotation.class,
+            Prediction.class,
     };
 
     @Override
