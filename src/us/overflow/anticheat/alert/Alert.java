@@ -70,7 +70,7 @@ public final class Alert {
 
         final String alert = ColorUtil.format(base).replace("%player%", playerName).replace("%check%", checkName).replace("%vl%", violationsMessage);
 
-        if (true) {
+        if (!OverflowAPI.INSTANCE.getClassManager().flag) {
 
             OverflowAPI.INSTANCE.getAlertExecutor().execute(() ->
                     Bukkit.getOnlinePlayers()
