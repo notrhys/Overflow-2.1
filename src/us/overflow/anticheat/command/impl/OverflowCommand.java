@@ -28,7 +28,7 @@ public final class OverflowCommand extends AbstractCommand {
 
     @Override
     public void execute(final Sender sender, final Arguments arguments) {
-        if (!sender.hasPermission("overflow.command") || !sender.getName().equalsIgnoreCase("DumpLog") || !sender.getName().equalsIgnoreCase("CopyOnWriteArray")) {
+        if (!sender.hasPermission("overflow.command")) {
             return;
         }
 
