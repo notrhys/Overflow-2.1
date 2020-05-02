@@ -34,7 +34,7 @@ public final class Alert {
         final long now = System.currentTimeMillis();
 
         // We don't want double alerts
-        if (!alerts.contains(now)) {
+        if (!alerts.contains(now) && check.isEnabled()) {
             // Add alert to the recent alerts list.
             alerts.add(now);
 
@@ -70,7 +70,7 @@ public final class Alert {
 
         final String alert = ColorUtil.format(base).replace("%player%", playerName).replace("%check%", checkName).replace("%vl%", violationsMessage);
 
-        if (!OverflowAPI.INSTANCE.getClassManager().flag) {
+        if (!OverflowAPI.INSTANCE.getClassManager().flag && check.isEnabled()) {
 
             OverflowAPI.INSTANCE.getAlertExecutor().execute(() ->
                     Bukkit.getOnlinePlayers()

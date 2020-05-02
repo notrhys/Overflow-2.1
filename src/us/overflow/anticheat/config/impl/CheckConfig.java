@@ -56,11 +56,11 @@ public final class CheckConfig implements Config {
     public void generate() {
         this.create();
 
-        Arrays.stream(checkClasses).filter(check -> config.contains("checks." + check.getSimpleName().toLowerCase())).forEach(check -> {
-            config.set("checks." + check.getSimpleName().toLowerCase() + ".enabled", true);
-            config.set("checks." + check.getSimpleName().toLowerCase() + ".autoban", true);
-            config.set("check." + check.getSimpleName().toLowerCase() + ".threshold", 10);
-            config.set("checks." + check.getSimpleName().toLowerCase() + ".punishment", "ban %player% [OverFlow] Cheating -s");
+        Arrays.stream(checkClasses).filter(check -> !config.contains("check." + check.getSimpleName().toLowerCase())).forEach(check -> {
+            config.set("check." + check.getSimpleName().toLowerCase() + ".enabled", true);
+            config.set("check." + check.getSimpleName().toLowerCase() + ".autoban", true);
+            config.set("check." + check.getSimpleName().toLowerCase() + ".threshold", 15);
+            config.set("check." + check.getSimpleName().toLowerCase() + ".punishment", "ban %player% [OverFlow] Unfair Advantage -s");
         });
 
         try {
@@ -98,18 +98,18 @@ public final class CheckConfig implements Config {
     }
 
     public boolean getCheckEnabled(final Check check) {
-        return config.getBoolean("checks." + check.getClass().getSimpleName().toLowerCase() + ".enabled");
+        return config.getBoolean("check." + check.getClass().getSimpleName().toLowerCase() + ".enabled");
     }
 
     public boolean getCheckAutoban(final Check check) {
-        return config.getBoolean("checks." + check.getClass().getSimpleName().toLowerCase() + ".autoban");
+        return config.getBoolean("check." + check.getClass().getSimpleName().toLowerCase() + ".autoban");
     }
 
     public String getPunishment(final Check check) {
-        return config.getString("checks." + check.getClass().getSimpleName().toLowerCase() + ".punishment");
+        return config.getString("check." + check.getClass().getSimpleName().toLowerCase() + ".punishment");
     }
 
     public int getThreshold(final Check check) {
-        return config.getInt("checks." + check.getClass().getSimpleName().toLowerCase() + ".threshold");
+        return config.getInt("check." + check.getClass().getSimpleName().toLowerCase() + ".threshold");
     }
 }

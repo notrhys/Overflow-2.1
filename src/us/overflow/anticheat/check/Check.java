@@ -25,6 +25,7 @@ public abstract class Check<T> {
     public Check(final PlayerData playerData) {
         this.playerData = playerData;
 
+        final CheckConfig checkConfig = OverflowAPI.INSTANCE.getConfigManager().getConfig(CheckConfig.class);
         final Class clazz = this.getClass();
 
         if (clazz.isAnnotationPresent(CheckData.class)) {
@@ -32,13 +33,10 @@ public abstract class Check<T> {
 
             this.checkName = checkData.name();
             this.threshold = checkData.threshold();
+            this.threshold = checkConfig.getThreshold(this);
+            this.autobans = checkConfig.getCheckAutoban(this);
+            this.enabled = checkConfig.getCheckEnabled(this);
         }
-
-        final CheckConfig checkConfig = OverflowAPI.INSTANCE.getConfigManager().getConfig(CheckConfig.class);
-
-        this.threshold = checkConfig.getThreshold(this);
-        this.autobans = checkConfig.getCheckAutoban(this);
-        this.enabled = checkConfig.getCheckEnabled(this);
     }
 
     protected Alert handleViolation() {
