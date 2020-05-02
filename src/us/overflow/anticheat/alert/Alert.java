@@ -34,7 +34,7 @@ public final class Alert {
         final long now = System.currentTimeMillis();
 
         // We don't want double alerts
-        if (!alerts.contains(now) && check.isEnabled()) {
+        if (!alerts.contains(now)) {
             // Add alert to the recent alerts list.
             alerts.add(now);
 

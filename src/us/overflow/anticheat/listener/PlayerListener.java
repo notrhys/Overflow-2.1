@@ -11,9 +11,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import us.overflow.anticheat.OverflowAPI;
-import us.overflow.anticheat.check.type.PositionCheck;
 import us.overflow.anticheat.data.PlayerData;
-import us.overflow.anticheat.packet.VersionHandler;
+import us.overflow.anticheat.processor.ProcessorManager;
 import us.overflow.anticheat.processor.impl.MovementProcessor;
 import us.overflow.anticheat.update.PositionUpdate;
 
@@ -45,29 +44,10 @@ public final class PlayerListener implements Listener {
 
         // Create the position update
         final PositionUpdate positionUpdate = new PositionUpdate(from, to);
+        final ProcessorManager processorManager = OverflowAPI.INSTANCE.getProcessorManager();
 
-        // Player did not move
-        if (from.distance(to) == 0.0) {
-            return;
-        }
-
-        // Spoofable but we will have bad packets checks for all of them.
-        if (player.isInsideVehicle() || player.isFlying() || player.getAllowFlight() || player.getGameMode() == GameMode.CREATIVE) {
-            return;
-        }
-
-        // We do not want checks to mess up due to player being inside an unloaded chunk
-        if (!player.getWorld().isChunkLoaded(to.getBlockX() >> 4, to.getBlockZ() >> 4)) {
-            return;
-        }
-
-        if (playerData.getActionManager().getTeleported().get()) {
-            return;
-        }
-
-        //noinspection unchecked
-        OverflowAPI.INSTANCE.getProcessorManager().getProcessor(MovementProcessor.class).process(playerData, positionUpdate);
-
+        // Cast into a different thread for even better performance
+        OverflowAPI.INSTANCE.getPositionExecutor().execute(() -> processorManager.getProcessor(MovementProcessor.class).process(playerData, positionUpdate));
     }
 
     @EventHandler

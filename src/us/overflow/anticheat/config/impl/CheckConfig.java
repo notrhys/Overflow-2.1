@@ -24,6 +24,7 @@ import us.overflow.anticheat.check.impl.scaffold.ScaffoldB;
 import us.overflow.anticheat.check.impl.scaffold.ScaffoldC;
 import us.overflow.anticheat.check.impl.speed.SpeedA;
 import us.overflow.anticheat.check.impl.speed.SpeedB;
+import us.overflow.anticheat.check.impl.speed.SpeedC;
 import us.overflow.anticheat.check.impl.timer.TimerA;
 import us.overflow.anticheat.config.type.Config;
 
@@ -44,7 +45,7 @@ public final class CheckConfig implements Config {
             BadPacketsA.class, BadPacketsB.class, BadPacketsC.class, BadPacketsD.class, BadPacketsE.class, BadPacketsF.class, BadPacketsG.class,
             ScaffoldA.class, ScaffoldB.class, ScaffoldC.class,
             InvalidA.class, InvalidB.class,
-            SpeedA.class, SpeedB.class,
+            SpeedA.class, SpeedB.class, SpeedC.class,
             TimerA.class,
             AutoTool.class,
             InvalidPosition.class, InvalidRotation.class,
