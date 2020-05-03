@@ -61,7 +61,7 @@ public final class ActionManager {
     public void onTeleport() {
         final long now = System.currentTimeMillis();
 
-        this.teleported.set(now - lastTeleport < 1000L);
+        this.teleported.set(now - lastTeleport < 100L);
 
         this.lastTeleport = now;
     }

@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.bukkit.entity.Player;
 import us.overflow.anticheat.check.impl.aimassist.prediction.Prediction;
 import us.overflow.anticheat.data.type.*;
+import us.overflow.anticheat.utils.EvictingList;
 
 @Getter @Setter
 public final class PlayerData {
