@@ -75,7 +75,7 @@ public final class SpeedA extends PositionCheck {
 
                 if (moveSpeed > speedLimit) {
                     //fix idk whats wrong just falses when moving
-                    this.handleViolation().addViolation(ViolationLevel.MEDIUM).create();
+                 //   this.handleViolation().addViolation(ViolationLevel.MEDIUM).create();
                 }
             }
         }
