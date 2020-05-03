@@ -31,11 +31,7 @@ public final class FlightF extends PacketCheck {
 
             if (wrappedPacketPlayInFlying.isHasPos() && (System.currentTimeMillis() - playerData.getLastJoin()) > 1000L) {
 
-                /*
-                    Hate this fucking check i legit wanna kill my self at this point i have 0 fucking motivation for this shit anymore thinking about putting a fork into the 200wat outlet
-                 */
-
-                if (getPlayerData().getPlayer().isFlying() || getPlayerData().getPlayer().getAllowFlight() || playerData.getPlayer().getGameMode() == GameMode.CREATIVE) {
+                if (playerData.getPlayer().isFlying() || playerData.getPlayer().getAllowFlight() || playerData.getPlayer().getGameMode() == GameMode.CREATIVE) {
                     airTicks = 0;
                     return;
                 }
@@ -54,11 +50,11 @@ public final class FlightF extends PacketCheck {
 
 
                 if (!clientGround && Math.abs(diff) < 0.0009f && airTicks > 15 && !playerData.getPositionManager().getBelowBlocks().get() && !playerData.getPositionManager().getTouchingLiquid().get() && !playerData.getPositionManager().getTouchingHalfBlocks().get() && !playerData.getPositionManager().getTouchingSlime().get() && !playerData.getPositionManager().getTouchingClimbable().get()) {
-             //       this.handleViolation().addViolation(ViolationLevel.LOW).create();
+                    this.handleViolation().addViolation(ViolationLevel.LOW).create();
                 }
 
                 if ((yGround && !clientGround) && !playerData.getPositionManager().getTouchingSlab().get() && !BlockUtil.isSlab(playerData.getPlayer()) && !playerData.getPositionManager().getBelowBlocks().get() && !playerData.getPositionManager().getTouchingLiquid().get() && !playerData.getPositionManager().getTouchingHalfBlocks().get() && !playerData.getPositionManager().getTouchingSlime().get() && !playerData.getPositionManager().getTouchingClimbable().get()) {
-           //         this.handleViolation().addViolation(ViolationLevel.LOW).create();
+                    this.handleViolation().addViolation(ViolationLevel.LOW).create();
                 }
 
                 lastY = wrappedPacketPlayInFlying.getY();

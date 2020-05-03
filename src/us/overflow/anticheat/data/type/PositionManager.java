@@ -28,7 +28,7 @@ public final class PositionManager {
     private Observable<Boolean> touchingSlime = new Observable<>(false);
 
     public void updatePositionFlags(final Location to) {
-        final Cuboid cuboid = new Cuboid(to).expand(0.0625, 0.0625, 0.0625).move(0.0, -0.55, 0.0);
+        final Cuboid cuboid = new Cuboid(to).expand(0.07, 0.07, 0.07).move(0.0, -0.55, 0.0);
 
         this.touchingAir.set(false);
         this.touchingClimbable.set(false);
@@ -52,7 +52,6 @@ public final class PositionManager {
             final boolean touchingGround = BlockUtil.isOnGround(to, 1) || BlockUtil.isOnGround(to, 2);
             final boolean touchingSlab = cuboid.checkBlocks(to.getWorld(), material -> material == Material.DOUBLE_STONE_SLAB2 || material == Material.STONE_SLAB2);
             final boolean touchingSlime = cuboid.checkBlocks(to.getWorld(), material -> material == Material.SLIME_BLOCK);
-
 
 
             this.touchingSlime.set(touchingSlime);
