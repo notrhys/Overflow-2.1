@@ -74,6 +74,7 @@ public final class SpeedA extends PositionCheck {
                 moveSpeed -= Math.sqrt(playerData.getVelocityX() * playerData.getVelocityX() + playerData.getVelocityZ() * playerData.getVelocityZ());
 
                 if (moveSpeed > speedLimit) {
+                    //fix idk whats wrong just falses when moving
                     this.handleViolation().addViolation(ViolationLevel.MEDIUM).create();
                 }
             }

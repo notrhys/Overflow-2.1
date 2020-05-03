@@ -83,6 +83,7 @@ public final class CheckManager {
                     .put(SpeedB.class, new SpeedB(playerData))
                     .put(TimerA.class, new TimerA(playerData))
                     .put(SpeedC.class, new SpeedC(playerData))
+                    .put(FlightF.class, new FlightF(playerData))
                     .build();
         }
     }
