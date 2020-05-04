@@ -23,7 +23,7 @@ public final class FlightD extends PositionCheck {
         final Location from = positionUpdate.getFrom();
         final Location to = positionUpdate.getTo();
 
-        final boolean touchingAir = playerData.getPositionManager().getTouchingAir().get();
+        final boolean touchingAir = playerData.getPositionManager().getTouchingAir().get() && !playerData.getPositionManager().getTouchingClimbable().get();
         final boolean properMotion = ReflectionUtil.getMotionY(playerData) > 0.0;
 
         if (playerData.getVelocityManager().getMaxHorizontal() > 0.0 || playerData.getVelocityManager().getMaxVertical() > 0.0) {

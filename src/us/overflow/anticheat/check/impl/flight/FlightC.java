@@ -34,7 +34,7 @@ public final class FlightC extends PositionCheck {
         final double deltaAcceleration = Math.abs(acceleration - lastAcceleration);
 
         // Making sure the player is only touching air and no other blocks to prevent false flags
-        final boolean touchingAir = (playerData.getPositionManager().getTouchingAir().get() || to.getY() % 0.015625 != 0.0) && !playerData.getPositionManager().getBelowBlocks().get();
+        final boolean touchingAir = !playerData.getPositionManager().getTouchingClimbable().get() && (playerData.getPositionManager().getTouchingAir().get() || to.getY() % 0.015625 != 0.0) && !playerData.getPositionManager().getBelowBlocks().get();
         final boolean properMotion = ReflectionUtil.getMotionY(playerData) > 0.0;
 
         // If the player isn't touching any blocks / isn't on ground

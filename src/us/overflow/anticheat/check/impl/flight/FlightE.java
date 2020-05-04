@@ -25,7 +25,7 @@ public final class FlightE extends PositionCheck {
         final Location from = positionUpdate.getFrom();
         final Location to = positionUpdate.getTo();
 
-        final boolean touchingAir = playerData.getPositionManager().getTouchingAir().get();
+        final boolean touchingAir = playerData.getPositionManager().getTouchingAir().get() && !playerData.getPositionManager().getTouchingClimbable().get();
 
         final int jumpModifier = MathUtil.getPotionEffectLevel(playerData.getPlayer(), PotionEffectType.JUMP);
 
