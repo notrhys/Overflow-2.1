@@ -39,6 +39,8 @@ public final class PlayerData {
     private double velocityY;
     private double velocityZ;
 
+    private double lastPosX, lastPosY, lastPosZ;
+
     private double sensitivityX = checkManager.getCheck(Prediction.class).sensitivityX;
     private double sensitivityY = checkManager.getCheck(Prediction.class).sensitivityY;
 

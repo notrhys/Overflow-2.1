@@ -1,6 +1,9 @@
 package us.overflow.anticheat.processor.impl;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
+import us.overflow.anticheat.OverflowAPI;
 import us.overflow.anticheat.check.type.PacketCheck;
 import us.overflow.anticheat.check.type.RotationCheck;
 import us.overflow.anticheat.data.PlayerData;
@@ -8,6 +11,7 @@ import us.overflow.anticheat.packet.type.*;
 import us.overflow.anticheat.packet.type.enums.EnumEntityUseAction;
 import us.overflow.anticheat.packet.type.enums.EnumPlayerAction;
 import us.overflow.anticheat.processor.type.Processor;
+import us.overflow.anticheat.update.PositionUpdate;
 import us.overflow.anticheat.update.RotationUpdate;
 import us.overflow.anticheat.update.head.HeadRotation;
 
@@ -50,6 +54,8 @@ public final class PacketProcessor implements Processor<WrappedPacket> {
 
             playerData.setClientTicks(playerData.getClientTicks() + 1);
             playerData.getActionManager().onFlying();
+
+            this.handleMoveEvent(playerData, wrapper);
         } else if (packet instanceof WrappedPacketPlayInUseEntity) {
             final WrappedPacketPlayInUseEntity wrapper = (WrappedPacketPlayInUseEntity) packet;
 
@@ -95,5 +101,33 @@ public final class PacketProcessor implements Processor<WrappedPacket> {
 
         //noinspection unchecked
         playerData.getCheckManager().getChecks().stream().filter(PacketCheck.class::isInstance).forEach(check -> check.process(packet));
+    }
+
+    private void handleMoveEvent(final PlayerData playerData, WrappedPacketPlayInFlying wrapper) {
+        final boolean checkMovement = wrapper.isCheckMovement();
+        final boolean position = wrapper.isHasPos();
+
+        if (position && checkMovement) {
+            final Player player = playerData.getPlayer();
+
+            final double posX = wrapper.getX();
+            final double posY = wrapper.getY();
+            final double posZ = wrapper.getZ();
+
+            final double lastPosX = playerData.getLastPosX();
+            final double lastPosY = playerData.getLastPosY();
+            final double lastPosZ = playerData.getLastPosZ();
+
+            final Location to = new Location(player.getWorld(), posX, posY, posZ);
+            final Location from = new Location(player.getWorld(), lastPosX, lastPosY, lastPosZ);
+
+            final PositionUpdate positionUpdate = new PositionUpdate(from, to);
+
+            OverflowAPI.INSTANCE.getProcessorManager().getProcessor(MovementProcessor.class).process(playerData, positionUpdate);
+
+            playerData.setLastPosX(posX);
+            playerData.setLastPosY(posY);
+            playerData.setLastPosZ(posZ);
+        }
     }
 }

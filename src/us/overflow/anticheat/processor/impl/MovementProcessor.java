@@ -33,6 +33,7 @@ public final class MovementProcessor implements Processor<PositionUpdate> {
             return;
         }
 
+        // Teleporting bad
         if (playerData.getActionManager().getTeleported().get()) {
             return;
         }

@@ -31,26 +31,6 @@ public final class PlayerListener implements Listener {
     }
 
     @EventHandler
-    public void onMove(final PlayerMoveEvent event) {
-        // Grab the player from the event
-        final Player player = event.getPlayer();
-
-        // Grab the player data from the manager
-        final PlayerData playerData = OverflowAPI.INSTANCE.getPlayerDataManager().getData(player);
-
-        // Get the from and the to location
-        final Location from = event.getFrom();
-        final Location to = event.getTo();
-
-        // Create the position update
-        final PositionUpdate positionUpdate = new PositionUpdate(from, to);
-        final ProcessorManager processorManager = OverflowAPI.INSTANCE.getProcessorManager();
-
-        // Cast into a different thread for even better performance
-        OverflowAPI.INSTANCE.getPositionExecutor().execute(() -> processorManager.getProcessor(MovementProcessor.class).process(playerData, positionUpdate));
-    }
-
-    @EventHandler
     public void onInteract(final PlayerInteractEvent event) {
         final Player player = event.getPlayer();
 

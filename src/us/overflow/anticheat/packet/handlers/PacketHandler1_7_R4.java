@@ -32,8 +32,9 @@ public final class PacketHandler1_7_R4 extends PlayerConnection {
         final boolean look = packet.k();
         final boolean position = packet.j();
         final boolean ground = packet.i();
+        final boolean checkMovement = ReflectionUtil.getFieldValue(PacketPlayInFlying.class, "hasMoved", boolean.class, packet);
 
-        final WrappedPacketPlayInFlying wrapper = new WrappedPacketPlayInFlying(posX, posY, posZ, position, look, ground, yaw, pitch);
+        final WrappedPacketPlayInFlying wrapper = new WrappedPacketPlayInFlying(posX, posY, posZ, position, look, ground, checkMovement, yaw, pitch);
 
         wrapper.parse(playerData);
     }
