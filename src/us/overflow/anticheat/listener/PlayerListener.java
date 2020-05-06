@@ -1,20 +1,14 @@
 package us.overflow.anticheat.listener;
 
-import org.bukkit.GameMode;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import us.overflow.anticheat.OverflowAPI;
 import us.overflow.anticheat.data.PlayerData;
-import us.overflow.anticheat.processor.ProcessorManager;
-import us.overflow.anticheat.processor.impl.MovementProcessor;
-import us.overflow.anticheat.update.PositionUpdate;
 
 public final class PlayerListener implements Listener {
 
