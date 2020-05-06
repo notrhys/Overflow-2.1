@@ -22,6 +22,10 @@ public final class PlayerListener implements Listener {
                 case ENTITY_ATTACK:
                     playerData.setLastAttackDamage(System.currentTimeMillis());
                     break;
+
+                case FALL:
+                    playerData.setLastFallDamage(System.currentTimeMillis());
+                    break;
             }
         }
     }

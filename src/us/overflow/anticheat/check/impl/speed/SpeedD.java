@@ -1,6 +1,5 @@
 package us.overflow.anticheat.check.impl.speed;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -10,6 +9,7 @@ import us.overflow.anticheat.check.type.PacketCheck;
 import us.overflow.anticheat.data.PlayerData;
 import us.overflow.anticheat.packet.type.WrappedPacket;
 import us.overflow.anticheat.packet.type.WrappedPacketPlayInFlying;
+import us.overflow.anticheat.packet.type.WrappedPacketPlayOutEntityVelocity;
 import us.overflow.anticheat.utils.CustomLocation;
 
 @CheckData(name = "Speed (D)")
@@ -19,26 +19,55 @@ public final class SpeedD extends PacketCheck {
         super(playerData);
     }
 
+    /*
+        Ripped out of sparky so ignore the mess, this is a replacement for speed A as it loves to false flag
+     */
+
     private double lastX, lastZ, movementSpeed, lastBlockY, offset = Math.pow(0.984, 9);
 
-    private int verbose, airTicks, groundTicks, slabTicks, stairTicks, iceTicks, blockAboveTicks, speedPotionTicks, slimeTicks;
+    private int verbose, airTicks, groundTicks, slabTicks, stairTicks, iceTicks, blockAboveTicks, speedPotionTicks, slimeTicks, invalidJumpPadTicks;
 
-    private long lastBlockJump, lastIce;
+    private long lastBlockJump, lastIce, lastJumpadSet;
 
-    private CustomLocation lastGroundLocation, to, from;
+    private CustomLocation to, from;
 
-    private boolean fail;
+    private boolean jumpPad, clientGround;
 
     @Override
     public void process(WrappedPacket packet) {
+
+        if (packet instanceof WrappedPacketPlayOutEntityVelocity) {
+            WrappedPacketPlayOutEntityVelocity wrappedPacketPlayOutEntityVelocity = (WrappedPacketPlayOutEntityVelocity) packet;
+            if (wrappedPacketPlayOutEntityVelocity.getEntityId() == getPlayerData().getPlayer().getEntityId()) {
+                if (!this.jumpPad && (System.currentTimeMillis() - getPlayerData().getLastFallDamage()) > 1000L && this.clientGround && (System.currentTimeMillis() - playerData.getLastAttackDamage()) > 20L) {
+                    this.jumpPad = true;
+                    this.lastJumpadSet = System.currentTimeMillis();
+                }
+            }
+        }
+
         if (packet instanceof WrappedPacketPlayInFlying) {
             WrappedPacketPlayInFlying wrappedPacketPlayInFlying = (WrappedPacketPlayInFlying) packet;
 
             if (wrappedPacketPlayInFlying.isHasPos()) {
 
-                if (this.fail) {
-                    this.fail = false;
-                    this.handleViolation().addViolation(ViolationLevel.MEDIUM).create();
+                if (this.jumpPad && this.to != null && this.from != null) {
+
+                    if (!getPlayerData().getPositionManager().getTouchingAir().get() && !this.clientGround && Math.abs(this.to.getY() - this.from.getY()) == 0.0f) {
+
+                        if (this.invalidJumpPadTicks > 30) {
+                            this.jumpPad = false;
+                            this.invalidJumpPadTicks = 0;
+                        }
+
+                        this.invalidJumpPadTicks++;
+                    } else {
+                        this.invalidJumpPadTicks = 0;
+                    }
+
+                    if ((System.currentTimeMillis() - this.lastJumpadSet) > 1000L && this.clientGround) {
+                        this.jumpPad = false;
+                    }
                 }
 
                 double x = wrappedPacketPlayInFlying.getX();
@@ -51,8 +80,11 @@ public final class SpeedD extends PacketCheck {
 
                 this.doCalulcations(location);
 
+
+                this.clientGround = wrappedPacketPlayInFlying.isOnGround();
                 this.from = this.to;
                 this.to = location;
+
                 this.movementSpeed = getSpeed(x, z);
                 this.lastX = x;
                 this.lastZ = z;
@@ -161,7 +193,7 @@ public final class SpeedD extends PacketCheck {
 
        if (speedPotionTicks > 0) threshold += getPotionEffectLevel() * 0.2;
 
-       if ((!getPlayerData().getPlayer().hasPotionEffect(PotionEffectType.SPEED) && speedPotionTicks > 0) || this.slimeTicks > 0 || this.iceTicks > 0 || (System.currentTimeMillis() - this.lastIce) < 1000L) {
+       if (this.jumpPad || (!getPlayerData().getPlayer().hasPotionEffect(PotionEffectType.SPEED) && speedPotionTicks > 0) || this.slimeTicks > 0 || this.iceTicks > 0 || (System.currentTimeMillis() - this.lastIce) < 1000L) {
            this.verbose = 0;
            return;
        }
@@ -169,7 +201,7 @@ public final class SpeedD extends PacketCheck {
         if (this.movementSpeed > threshold) {
             if (this.verbose++ > 2) {
                 this.verbose = 0;
-                this.fail = true;
+                this.handleViolation().addViolation(ViolationLevel.MEDIUM).create();
             }
         } else {
             this.verbose -= (this.verbose > 0 ? 1 : 0);
