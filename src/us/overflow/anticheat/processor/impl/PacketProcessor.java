@@ -1,6 +1,5 @@
 package us.overflow.anticheat.processor.impl;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import us.overflow.anticheat.OverflowAPI;

@@ -24,6 +24,15 @@ public final class MathUtil {
         throw new Exception("You cannot register utility classes");
     }
 
+    public static double round(double value, int places) {
+        if (places < 0) {
+            throw new IllegalArgumentException();
+        }
+        BigDecimal bd2 = new BigDecimal(value);
+        bd2 = bd2.setScale(places, RoundingMode.HALF_UP);
+        return bd2.doubleValue();
+    }
+
     public static float getDistanceBetweenAngles(float from, float to) {
         float distance = Math.abs(from - to) % 360.0f;
         return distance > 180.f ? 360.f - distance : distance;

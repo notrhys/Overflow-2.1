@@ -23,6 +23,7 @@ import us.overflow.anticheat.check.impl.scaffold.ScaffoldC;
 import us.overflow.anticheat.check.impl.speed.SpeedA;
 import us.overflow.anticheat.check.impl.speed.SpeedB;
 import us.overflow.anticheat.check.impl.speed.SpeedC;
+import us.overflow.anticheat.check.impl.speed.SpeedD;
 import us.overflow.anticheat.check.impl.timer.TimerA;
 import us.overflow.anticheat.check.impl.velocity.VelocityA;
 import us.overflow.anticheat.check.impl.velocity.VelocityB;
@@ -84,6 +85,7 @@ public final class CheckManager {
                     .put(TimerA.class, new TimerA(playerData))
                     .put(SpeedC.class, new SpeedC(playerData))
                     .put(FlightF.class, new FlightF(playerData))
+                    .put(SpeedD.class, new SpeedD(playerData))
                     .build();
         }
     }

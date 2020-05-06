@@ -1,5 +1,6 @@
 package us.overflow.anticheat.check.impl.speed;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -30,7 +31,7 @@ public final class SpeedA extends PositionCheck {
         double blockSlipperiness = this.blockSlipperiness;
 
         final boolean onGround = ReflectionUtil.onGround(playerData);
-        final double speedLimit = playerData.getPositionManager().getBelowBlocks().get() ? 3.6 : 1.f;
+        final double speedLimit = playerData.getPositionManager().getBelowBlocks().get() ? 3.6 : 1.0f;
 
         if (onGround) {
             blockSlipperiness *= 0.91f;
@@ -73,9 +74,11 @@ public final class SpeedA extends PositionCheck {
 
                 moveSpeed -= Math.sqrt(playerData.getVelocityX() * playerData.getVelocityX() + playerData.getVelocityZ() * playerData.getVelocityZ());
 
+          //      Bukkit.broadcastMessage(""+moveSpeed + " " + speedLimit);
+
                 if (moveSpeed > speedLimit) {
                     //fix idk whats wrong just falses when moving
-                 //   this.handleViolation().addViolation(ViolationLevel.MEDIUM).create();
+                  //  this.handleViolation().addViolation(ViolationLevel.MEDIUM).create();
                 }
             }
         }

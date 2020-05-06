@@ -1,13 +1,9 @@
 package us.overflow.anticheat.data.type;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import jdk.nashorn.internal.ir.Block;
 import lombok.Getter;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.block.DaylightDetector;
 import org.bukkit.material.*;
-import us.overflow.anticheat.OverflowAPI;
 import us.overflow.anticheat.data.Observable;
 import us.overflow.anticheat.utils.BlockUtil;
 import us.overflow.anticheat.utils.Cuboid;
@@ -26,6 +22,9 @@ public final class PositionManager {
     private Observable<Boolean> touchingGround = new Observable<>(false);
     private Observable<Boolean> touchingSlab = new Observable<>(false);
     private Observable<Boolean> touchingSlime = new Observable<>(false);
+    private Observable<Boolean> touchingStair = new Observable<>(false);
+    private Observable<Boolean> touchingIce = new Observable<>(false);
+    private Observable<Boolean> touchingWeb = new Observable<>(false);
 
     public void updatePositionFlags(final Location to) {
         final Cuboid cuboid = new Cuboid(to).expand(0.07, 0.07, 0.07).move(0.0, -0.55, 0.0);
@@ -51,7 +50,14 @@ public final class PositionManager {
         final boolean touchingGround = BlockUtil.isOnGround(to, 1) || BlockUtil.isOnGround(to, 2);
         final boolean touchingSlab = cuboid.checkBlocks(to.getWorld(), material -> material == Material.DOUBLE_STONE_SLAB2 || material == Material.STONE_SLAB2);
         final boolean touchingSlime = cuboid.checkBlocks(to.getWorld(), material -> material == Material.SLIME_BLOCK);
+        final boolean touchingStair = cuboid.checkBlocks(to.getWorld(), material -> material.getData() == Stairs.class);
+        final boolean touchingIce = cuboid.checkBlocks(to.getWorld(), material -> material == Material.ICE || material == Material.PACKED_ICE);
+        final boolean touchingWeb = cuboid.checkBlocks(to.getWorld(), material -> material == Material.WEB);
 
+
+        this.touchingWeb.set(touchingWeb);
+        this.touchingIce.set(touchingIce);
+        this.touchingStair.set(touchingStair);
         this.touchingSlime.set(touchingSlime);
         this.touchingSlab.set(touchingSlab);
         this.touchingGround.set(touchingGround);

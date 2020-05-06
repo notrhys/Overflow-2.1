@@ -4,6 +4,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -11,6 +12,19 @@ import us.overflow.anticheat.OverflowAPI;
 import us.overflow.anticheat.data.PlayerData;
 
 public final class PlayerListener implements Listener {
+
+    @EventHandler
+    public void onEntityDamage(EntityDamageByEntityEvent event) {
+        if (event.getDamager() instanceof Player && event.getEntity() instanceof Player) {
+            final PlayerData playerData = OverflowAPI.INSTANCE.getPlayerDataManager().getData((Player) event.getEntity());
+
+            switch (event.getCause()) {
+                case ENTITY_ATTACK:
+                    playerData.setLastAttackDamage(System.currentTimeMillis());
+                    break;
+            }
+        }
+    }
 
     @EventHandler
     public void onJoin(final PlayerJoinEvent event) {

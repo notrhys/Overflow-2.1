@@ -17,7 +17,6 @@ public final class FlightF extends PacketCheck {
 
     private double lastY;
 
-
     private int airTicks;
 
     public FlightF(final PlayerData playerData) {

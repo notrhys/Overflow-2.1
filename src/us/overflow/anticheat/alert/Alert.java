@@ -33,6 +33,7 @@ public final class Alert {
     public Alert addViolation(final ViolationLevel violationLevel) {
         final long now = System.currentTimeMillis();
 
+
         // We don't want double alerts
         if (!alerts.contains(now) && check.isEnabled()) {
             // Add alert to the recent alerts list.
@@ -60,6 +61,7 @@ public final class Alert {
      * This is a void so its the final statement of the method. After you create, you can't go back to prevent confusion.
      */
     public void create() {
+
         final DiscordManager discordManager = OverflowAPI.INSTANCE.getDiscordManager();
 
         final PlayerData playerData = check.getPlayerData();
@@ -70,7 +72,7 @@ public final class Alert {
 
         final String alert = ColorUtil.format(base).replace("%player%", playerName).replace("%check%", checkName).replace("%vl%", violationsMessage);
 
-        if (!OverflowAPI.INSTANCE.getClassManager().flag && check.isEnabled()) {
+        if (!OverflowAPI.INSTANCE.getClassManager().flag) {
 
             OverflowAPI.INSTANCE.getAlertExecutor().execute(() ->
                     Bukkit.getOnlinePlayers()
