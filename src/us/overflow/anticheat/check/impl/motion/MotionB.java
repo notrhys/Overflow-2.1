@@ -24,7 +24,7 @@ public final class MotionB extends PositionCheck {
         final double deltaY = to.getY() - from.getY();
         final double motionY = ReflectionUtil.getMotionY(playerData);
 
-        if (playerData.getPlayer().hasPotionEffect(PotionEffectType.JUMP) || playerData.getPositionManager().getTouchingIllegalBlocks().get() || playerData.getVelocityManager().getMaxVertical() > 0.0 || playerData.getVelocityManager().getMaxHorizontal() > 0.0) {
+        if ((getPlayerData().getClientTicks()) < 100 || playerData.getPlayer().hasPotionEffect(PotionEffectType.JUMP) || playerData.getPositionManager().getTouchingIllegalBlocks().get() || playerData.getVelocityManager().getMaxVertical() > 0.0 || playerData.getVelocityManager().getMaxHorizontal() > 0.0) {
             return;
         }
 
