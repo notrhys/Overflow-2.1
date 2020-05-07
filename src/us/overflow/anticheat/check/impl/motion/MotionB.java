@@ -24,12 +24,13 @@ public final class MotionB extends PositionCheck {
         final double deltaY = to.getY() - from.getY();
         final double motionY = ReflectionUtil.getMotionY(playerData);
 
-        if ((getPlayerData().getClientTicks()) < 100 || playerData.getPlayer().hasPotionEffect(PotionEffectType.JUMP) || playerData.getPositionManager().getTouchingIllegalBlocks().get() || playerData.getVelocityManager().getMaxVertical() > 0.0 || playerData.getVelocityManager().getMaxHorizontal() > 0.0) {
+        if (getPlayerData().getPositionManager().getTouchingSlab().get() || getPlayerData().getPositionManager().getTouchingStair().get() || getPlayerData().getPositionManager().getTouchingHalfBlocks().get() || (getPlayerData().getClientTicks()) < 100 || playerData.getPlayer().hasPotionEffect(PotionEffectType.JUMP) || playerData.getPositionManager().getTouchingIllegalBlocks().get() || playerData.getVelocityManager().getMaxVertical() > 0.0 || playerData.getVelocityManager().getMaxHorizontal() > 0.0) {
             return;
         }
 
         if (deltaY > 0.5 && motionY <= 0.0) {
-            this.handleViolation().addViolation(ViolationLevel.MEDIUM).create();
+          //  this.handleViolation().addViolation(ViolationLevel.MEDIUM).create();
         }
     }
 }
+

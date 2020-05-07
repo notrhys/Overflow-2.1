@@ -27,7 +27,7 @@ public final class SpeedD extends PacketCheck {
 
     private int verbose, airTicks, groundTicks, slabTicks, stairTicks, iceTicks, blockAboveTicks, speedPotionTicks, slimeTicks, invalidJumpPadTicks;
 
-    private long lastBlockJump, lastIce, lastJumpadSet;
+    private long lastBlockJump, lastIce, lastJumpadSet, lastSlime;
 
     private CustomLocation to, from;
 
@@ -137,16 +137,21 @@ public final class SpeedD extends PacketCheck {
         }
 
         if (slime) {
-            if (slimeTicks < 20) slabTicks++;
+            if (slimeTicks < 100) slabTicks+=20;
         } else {
             if (slimeTicks > 0) slimeTicks--;
         }
 
+        if (slimeTicks > 0) lastSlime = System.currentTimeMillis();
+
         if (ice) {
             if (iceTicks < 20) iceTicks++;
-            this.lastIce = System.currentTimeMillis();
         } else {
             if (iceTicks > 0) iceTicks--;
+        }
+
+        if (iceTicks > 0) {
+            this.lastIce = System.currentTimeMillis();
         }
 
 
@@ -175,6 +180,7 @@ public final class SpeedD extends PacketCheck {
     }
 
     private void doCheck() {
+
         float threshold = (float) (this.airTicks > 0 ? 0.4163 * this.offset : this.groundTicks > 24 ? 0.291 : 0.375);
 
         if (slabTicks > 0 || stairTicks > 0) {
@@ -193,7 +199,7 @@ public final class SpeedD extends PacketCheck {
 
        if (speedPotionTicks > 0) threshold += getPotionEffectLevel() * 0.2;
 
-       if (this.jumpPad || (!getPlayerData().getPlayer().hasPotionEffect(PotionEffectType.SPEED) && speedPotionTicks > 0) || this.slimeTicks > 0 || this.iceTicks > 0 || (System.currentTimeMillis() - this.lastIce) < 1000L) {
+       if (slimeTicks > 0 || (System.currentTimeMillis() - lastSlime) < 1000L || this.jumpPad || (!getPlayerData().getPlayer().hasPotionEffect(PotionEffectType.SPEED) && speedPotionTicks > 0) || this.slimeTicks > 0 || this.iceTicks > 0 || (System.currentTimeMillis() - this.lastIce) < 1000L) {
            this.verbose = 0;
            return;
        }

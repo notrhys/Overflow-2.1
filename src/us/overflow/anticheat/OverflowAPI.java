@@ -30,10 +30,10 @@ public enum OverflowAPI {
 
     private OverflowPlugin plugin;
 
-    private final Executor judgementExecutor = Executors.newSingleThreadExecutor();
-    private final Executor alertExecutor = Executors.newSingleThreadExecutor();
-    private final Executor packetExecutor = Executors.newSingleThreadExecutor();
-    private final Executor positionExecutor = Executors.newSingleThreadExecutor();
+    private final ScheduledExecutorService judgementExecutor = Executors.newSingleThreadScheduledExecutor();
+    private final ScheduledExecutorService alertExecutor = Executors.newSingleThreadScheduledExecutor();
+    private final ScheduledExecutorService packetExecutor = Executors.newSingleThreadScheduledExecutor();
+    private final ScheduledExecutorService positionExecutor = Executors.newSingleThreadScheduledExecutor();
 
     private final ScheduledExecutorService authExecutor = Executors.newSingleThreadScheduledExecutor();
 
@@ -85,5 +85,9 @@ public enum OverflowAPI {
     public void shutdown() {
         this.plugin = null;
         authExecutor.shutdownNow();
+        judgementExecutor.shutdownNow();
+        alertExecutor.shutdownNow();
+        packetExecutor.shutdownNow();
+        positionExecutor.shutdownNow();
     }
 }

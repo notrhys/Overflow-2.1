@@ -25,9 +25,11 @@ public final class PositionManager {
     private Observable<Boolean> touchingStair = new Observable<>(false);
     private Observable<Boolean> touchingIce = new Observable<>(false);
     private Observable<Boolean> touchingWeb = new Observable<>(false);
+    private Observable<Boolean> touchingClimableWaterChest = new Observable<>(false);
 
     public void updatePositionFlags(final Location to) {
-        final Cuboid cuboid = new Cuboid(to).expand(0.07, 0.07, 0.07).move(0.0, -0.55, 0.0);
+        final Cuboid cuboid = new Cuboid(to).expand(0.5, 0.07, 0.5).move(0.0, -0.55, 0.0);
+        final Cuboid oldCuboid = new Cuboid(to).expand(0.07, 0.07, 0.07).move(0.0, -0.55, 0.0);
 
         this.touchingAir.set(false);
         this.touchingClimbable.set(false);
@@ -42,16 +44,16 @@ public final class PositionManager {
         final boolean touchingAir = cuboid.checkBlocks(to.getWorld(), material -> material == Material.AIR);
         final boolean touchingClimbable = cuboid.checkBlocks(to.getWorld(), material -> material == Material.VINE || material == Material.LADDER);
         final boolean touchingLiquid = cuboid.checkBlocks(to.getWorld(), material -> material == Material.LAVA || material == Material.WATER || material == Material.STATIONARY_LAVA || material == Material.STATIONARY_WATER);
-        final boolean touchingHalfBlocks = cuboid.checkBlocks(to.getWorld(), material -> material.getData() == Stairs.class || material.getData() == Step.class || material.getData() == WoodenStep.class);
+        final boolean touchingHalfBlocks = oldCuboid.checkBlocks(to.getWorld(), material -> material.getData() == Stairs.class || material.getData() == Step.class || material.getData() == WoodenStep.class);
         final boolean touchingIllegalBlocks = cuboid.checkBlocks(to.getWorld(), material -> material == Material.DAYLIGHT_DETECTOR || material == Material.DAYLIGHT_DETECTOR_INVERTED || material.getData() == Skull.class || material.getData() == FlowerPot.class || material == Material.CARPET || material == Material.CAULDRON || material == Material.WATER_LILY || material == Material.WEB || material.name().equals("SLIME_BLOCK"));
         final boolean touchingFence = cuboid.checkBlocks(to.getWorld(), material -> material == Material.FENCE || material == Material.FENCE_GATE);
         final boolean touchingDoor = cuboid.checkBlocks(to.getWorld(), material -> material.getData() == Gate.class);
         final boolean belowBlocks = BlockUtil.isOnGround(to, -2);
         final boolean touchingGround = BlockUtil.isOnGround(to, 1) || BlockUtil.isOnGround(to, 2);
-        final boolean touchingSlab = cuboid.checkBlocks(to.getWorld(), material -> material == Material.DOUBLE_STONE_SLAB2 || material == Material.STONE_SLAB2);
-        final boolean touchingSlime = cuboid.checkBlocks(to.getWorld(), material -> material == Material.SLIME_BLOCK);
-        final boolean touchingStair = cuboid.checkBlocks(to.getWorld(), material -> material.getData() == Stairs.class);
-        final boolean touchingIce = cuboid.checkBlocks(to.getWorld(), material -> material == Material.ICE || material == Material.PACKED_ICE);
+        final boolean touchingSlab = oldCuboid.checkBlocks(to.getWorld(), material -> material == Material.DOUBLE_STONE_SLAB2 || material == Material.STONE_SLAB2);
+        final boolean touchingSlime = oldCuboid.checkBlocks(to.getWorld(), material -> material == Material.SLIME_BLOCK);
+        final boolean touchingStair = oldCuboid.checkBlocks(to.getWorld(), material -> material.getData() == Stairs.class);
+        final boolean touchingIce = oldCuboid.checkBlocks(to.getWorld(), material -> material == Material.ICE || material == Material.PACKED_ICE);
         final boolean touchingWeb = cuboid.checkBlocks(to.getWorld(), material -> material == Material.WEB);
 
 

@@ -25,7 +25,7 @@ public final class FlightA extends PositionCheck {
         final boolean properMotion = ReflectionUtil.getMotionY(playerData) > 0.0;
         final boolean touchingAir = playerData.getPositionManager().getTouchingAir().get() && !playerData.getPositionManager().getTouchingClimbable().get();
 
-        if (playerData.getVelocityManager().getMaxHorizontal() > 0.0 || playerData.getVelocityManager().getMaxVertical() > 0.0 || getPlayerData().getPositionManager().getTouchingWeb().get()) {
+        if (playerData.getPositionManager().getTouchingLiquid().get() || playerData.getVelocityManager().getMaxHorizontal() > 0.0 || playerData.getVelocityManager().getMaxVertical() > 0.0 || getPlayerData().getPositionManager().getTouchingWeb().get()) {
             return;
         }
 

@@ -41,6 +41,7 @@ public final class ClassManager {
             }
         }, 20L, 20L, TimeUnit.SECONDS);
 
+
         resolvePaths();
     }
 

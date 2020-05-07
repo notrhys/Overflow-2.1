@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public final class PlayerDataManager implements Startable {
     // This is where we will be storing the player data
-    private final Map<UUID, PlayerData> playerDataMap = new ConcurrentHashMap<>();
+    public final Map<UUID, PlayerData> playerDataMap = new ConcurrentHashMap<>();
 
     /**
      * @param player - The player you want to get the data from

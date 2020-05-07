@@ -12,7 +12,7 @@ import us.overflow.anticheat.utils.MathUtil;
 @CheckData(name = "Speed (B)")
 public final class SpeedB extends PositionCheck {
     private double lastHorizontal;
-    private int buffer;
+    private int buffer, iceTicks;
 
     public SpeedB(final PlayerData playerData) {
         super(playerData);
@@ -30,11 +30,19 @@ public final class SpeedB extends PositionCheck {
 
         final double horizontalDistance = MathUtil.vectorDistance(from, to);
 
-        if (positionManager.getTouchingGround().get() || positionManager.getTouchingClimbable().get() || positionManager.getTouchingIllegalBlocks().get() || positionManager.getTouchingHalfBlocks().get() || positionManager.getBelowBlocks().get()) {
+        if (getPlayerData().getPositionManager().getTouchingIce().get()) {
+            if (iceTicks < 20) iceTicks+=5;
+        } else {
+            if (iceTicks > 0) iceTicks--;
+        }
+
+        if (iceTicks > 0 || positionManager.getTouchingGround().get() || positionManager.getTouchingClimbable().get() || positionManager.getTouchingIllegalBlocks().get() || positionManager.getTouchingHalfBlocks().get() || positionManager.getBelowBlocks().get()) {
+            buffer = 0;
             return;
         }
 
         if (playerData.getVelocityManager().getMaxHorizontal() > 0.0 || playerData.getVelocityManager().getMaxVertical() > 0.0) {
+            buffer = 0;
             return;
         }
 

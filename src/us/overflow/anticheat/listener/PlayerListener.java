@@ -1,5 +1,6 @@
 package us.overflow.anticheat.listener;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,6 +13,10 @@ import us.overflow.anticheat.OverflowAPI;
 import us.overflow.anticheat.data.PlayerData;
 
 public final class PlayerListener implements Listener {
+
+    public PlayerListener() {
+        Bukkit.getServer().getOnlinePlayers().forEach(this::addUser);
+    }
 
     @EventHandler
     public void onEntityDamage(EntityDamageByEntityEvent event) {
@@ -32,9 +37,10 @@ public final class PlayerListener implements Listener {
 
     @EventHandler
     public void onJoin(final PlayerJoinEvent event) {
-        // Grab the player from the event
-        final Player player = event.getPlayer();
+        addUser(event.getPlayer());
+    }
 
+    private void addUser(final Player player) {
         // Grab the player data from the player
         final PlayerData playerData = OverflowAPI.INSTANCE.getPlayerDataManager().getData(player);
 

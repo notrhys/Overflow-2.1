@@ -10,7 +10,7 @@ import us.overflow.anticheat.utils.ReflectionUtil;
 
 @CheckData(name = "Flight (C)")
 public final class FlightC extends PositionCheck {
-    private int airTicks = 0, hoverBuffer, accelerationBuffer;
+    private int airTicks = 0, hoverBuffer, accelerationBuffer, blockAboveTicks;
     private double lastDeltaY, lastAcceleration;
 
     public FlightC(final PlayerData playerData) {
@@ -22,7 +22,14 @@ public final class FlightC extends PositionCheck {
         final Location from = positionUpdate.getFrom();
         final Location to = positionUpdate.getTo();
 
-        if (playerData.getVelocityManager().getMaxVertical() > 0.0 || playerData.getVelocityManager().getMaxHorizontal() > 0.0) {
+        if (getPlayerData().getPositionManager().getBelowBlocks().get()) {
+            if (blockAboveTicks < 100) blockAboveTicks+=20;
+        } else {
+            if (blockAboveTicks > 0) blockAboveTicks--;
+        }
+
+        if (blockAboveTicks > 0 || playerData.getVelocityManager().getMaxVertical() > 0.0 || playerData.getVelocityManager().getMaxHorizontal() > 0.0) {
+            hoverBuffer = 0;
             return;
         }
 
