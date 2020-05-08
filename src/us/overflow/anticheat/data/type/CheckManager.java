@@ -55,6 +55,7 @@ public final class CheckManager {
                     .put(KillAuraE.class, new KillAuraE(playerData))
                     .put(KillAuraF.class, new KillAuraF(playerData))
                     .put(KillAuraG.class, new KillAuraG(playerData))
+                    .put(KillAuraH.class, new KillAuraH(playerData))
                     .put(InvalidA.class, new InvalidA(playerData))
                     .put(InvalidB.class, new InvalidB(playerData))
                     .put(AimAssistA.class, new AimAssistA(playerData))
