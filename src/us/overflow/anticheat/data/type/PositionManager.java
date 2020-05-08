@@ -56,7 +56,6 @@ public final class PositionManager {
         final boolean touchingIce = oldCuboid.checkBlocks(to.getWorld(), material -> material == Material.ICE || material == Material.PACKED_ICE);
         final boolean touchingWeb = cuboid.checkBlocks(to.getWorld(), material -> material == Material.WEB);
 
-
         this.touchingWeb.set(touchingWeb);
         this.touchingIce.set(touchingIce);
         this.touchingStair.set(touchingStair);

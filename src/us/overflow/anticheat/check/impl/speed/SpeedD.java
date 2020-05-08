@@ -36,6 +36,8 @@ public final class SpeedD extends PacketCheck {
     @Override
     public void process(WrappedPacket packet) {
 
+        if (playerData.getPlayer().getAllowFlight()) return;
+
         if (packet instanceof WrappedPacketPlayOutEntityVelocity) {
             WrappedPacketPlayOutEntityVelocity wrappedPacketPlayOutEntityVelocity = (WrappedPacketPlayOutEntityVelocity) packet;
             if (wrappedPacketPlayOutEntityVelocity.getEntityId() == getPlayerData().getPlayer().getEntityId()) {

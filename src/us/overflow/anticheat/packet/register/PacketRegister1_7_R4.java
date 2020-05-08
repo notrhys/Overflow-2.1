@@ -17,16 +17,4 @@ public final class PacketRegister1_7_R4 {
 
         OverflowAPI.INSTANCE.getPacketExecutor().execute(() -> new PacketHandler1_7_R4(entityPlayer.server, entityPlayer.playerConnection.networkManager, entityPlayer, playerData));
     }
-
-    public void sendTransactionPacket(final PlayerData playerData, final short action) {
-        final PacketPlayOutTransaction transaction = new PacketPlayOutTransaction((byte) 0, action, false);
-
-        ((CraftPlayer) playerData.getPlayer()).getHandle().playerConnection.sendPacket(transaction);
-    }
-
-    public void sendKeepAlivePacket(final PlayerData playerData, int action) {
-        final PacketPlayOutKeepAlive keepAlive = new PacketPlayOutKeepAlive(action);
-
-        ((CraftPlayer) playerData.getPlayer()).getHandle().playerConnection.sendPacket(keepAlive);
-    }
 }
