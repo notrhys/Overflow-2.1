@@ -9,6 +9,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import us.overflow.anticheat.OverflowAPI;
 import us.overflow.anticheat.data.PlayerData;
 
@@ -22,6 +23,17 @@ public final class PlayerListener implements Listener {
             // Create the packet handler using the version handler with the appropriate version
             OverflowAPI.INSTANCE.getVersionHandler().create(playerData);
         });
+    }
+
+    @EventHandler
+    public void onTeleport(PlayerTeleportEvent event) {
+        final PlayerData playerData = OverflowAPI.INSTANCE.getPlayerDataManager().getData(event.getPlayer());
+
+        if (event.getCause() != PlayerTeleportEvent.TeleportCause.UNKNOWN) {
+            playerData.setLastTeleport(System.currentTimeMillis());
+        } else {
+            playerData.setLastUnknownTeleport(System.currentTimeMillis());
+        }
     }
 
     @EventHandler

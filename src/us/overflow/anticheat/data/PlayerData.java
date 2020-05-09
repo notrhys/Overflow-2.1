@@ -50,7 +50,7 @@ public final class PlayerData {
     private double mouseDeltaX = checkManager.getCheck(Prediction.class).deltaX;
     private double mouseDeltaY = checkManager.getCheck(Prediction.class).deltaY;
 
-    private long lastJoin, lastAttackDamage, lastFallDamage;
+    private long lastJoin, lastAttackDamage, lastFallDamage, lastTeleport, lastUnknownTeleport;
 
     public PlayerData(final Player player) {
         this.player = player;
