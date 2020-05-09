@@ -12,6 +12,7 @@ import us.overflow.anticheat.packet.type.enums.EnumPlayerAction;
 import us.overflow.anticheat.processor.type.Processor;
 import us.overflow.anticheat.update.PositionUpdate;
 import us.overflow.anticheat.update.RotationUpdate;
+import us.overflow.anticheat.update.box.PlayerPosition;
 import us.overflow.anticheat.update.head.HeadRotation;
 
 public final class PacketProcessor implements Processor<WrappedPacket> {
@@ -23,6 +24,7 @@ public final class PacketProcessor implements Processor<WrappedPacket> {
 
             final boolean position = wrapper.isHasPos();
             final boolean looked = wrapper.isHasLook();
+            final boolean ground = wrapper.isOnGround();
 
             if (looked) {
                 final float yaw = wrapper.getYaw();
@@ -44,6 +46,12 @@ public final class PacketProcessor implements Processor<WrappedPacket> {
             }
 
             if (position) {
+                final double posX = wrapper.getX();
+                final double posZ = wrapper.getZ();
+
+                final PlayerPosition playerPosition = new PlayerPosition(posX, posZ);
+
+                playerData.getLocations().add(playerPosition);
                 playerData.setStandTicks(0);
             } else {
                 final int standTicks = playerData.getStandTicks();

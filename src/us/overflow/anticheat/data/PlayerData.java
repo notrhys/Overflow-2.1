@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.bukkit.entity.Player;
 import us.overflow.anticheat.check.impl.aimassist.prediction.Prediction;
 import us.overflow.anticheat.data.type.*;
+import us.overflow.anticheat.update.box.PlayerPosition;
 import us.overflow.anticheat.utils.EvictingList;
 
 @Getter @Setter
@@ -31,6 +32,8 @@ public final class PlayerData {
     private final Observable<Boolean> cinematic = new Observable<>(false);
     private final Observable<Boolean> sprinting =  new Observable<>(false);
     private final Observable<Boolean> velocity = new Observable<>(false);
+
+    private final EvictingList<PlayerPosition> locations = new EvictingList<>(10);
 
     private int standTicks, clientTicks;
     private float lastYaw, lastPitch;
