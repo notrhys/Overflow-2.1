@@ -46,7 +46,7 @@ public final class Reach extends PacketCheck {
                 final PlayerPosition playerPosition = playerData.getPlayerPosition();
 
                 synchronized (targetData.getLocations()) {
-                    final double reach = targetData.getLocations().stream().mapToDouble(d -> d.getDistanceSquared(playerPosition)).min().orElse(0.0);
+                    final double reach = Math.sqrt(targetData.getLocations().stream().mapToDouble(d -> d.getDistanceSquared(playerPosition)).min().orElse(0.0));
 
                     if (reach > 3.1 && reach < 5.f) {
                         if (++buffer > 2) {
