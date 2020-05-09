@@ -35,6 +35,8 @@ public final class PlayerData {
 
     private final EvictingList<PlayerPosition> locations = new EvictingList<>(10);
 
+    private PlayerPosition playerPosition = new PlayerPosition(0, 0);
+
     private int standTicks, clientTicks;
     private float lastYaw, lastPitch;
 

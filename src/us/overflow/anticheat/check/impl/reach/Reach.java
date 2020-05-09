@@ -43,7 +43,7 @@ public final class Reach extends PacketCheck {
 
             if (valid) {
                 final PlayerData targetData = OverflowAPI.INSTANCE.getPlayerDataManager().getData(target);
-                final PlayerPosition playerPosition = playerData.getLocations().getLast();
+                final PlayerPosition playerPosition = playerData.getPlayerPosition();
 
                 synchronized (targetData.getLocations()) {
                     final double reach = targetData.getLocations().stream().mapToDouble(d -> d.getDistanceSquared(playerPosition)).min().orElse(0.0);

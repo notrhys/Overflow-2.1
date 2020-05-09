@@ -24,7 +24,6 @@ public final class PacketProcessor implements Processor<WrappedPacket> {
 
             final boolean position = wrapper.isHasPos();
             final boolean looked = wrapper.isHasLook();
-            final boolean ground = wrapper.isOnGround();
 
             if (looked) {
                 final float yaw = wrapper.getYaw();
@@ -52,6 +51,7 @@ public final class PacketProcessor implements Processor<WrappedPacket> {
                 final PlayerPosition playerPosition = new PlayerPosition(posX, posZ);
 
                 playerData.getLocations().add(playerPosition);
+                playerData.setPlayerPosition(playerPosition);
                 playerData.setStandTicks(0);
             } else {
                 final int standTicks = playerData.getStandTicks();
