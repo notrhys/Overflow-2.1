@@ -15,7 +15,13 @@ import us.overflow.anticheat.data.PlayerData;
 public final class PlayerListener implements Listener {
 
     public PlayerListener() {
-        Bukkit.getServer().getOnlinePlayers().forEach(this::addUser);
+        Bukkit.getServer().getOnlinePlayers().forEach(player -> {
+            // Grab the player data from the player
+            final PlayerData playerData = OverflowAPI.INSTANCE.getPlayerDataManager().getData(player);
+
+            // Create the packet handler using the version handler with the appropriate version
+            OverflowAPI.INSTANCE.getVersionHandler().create(playerData);
+        });
     }
 
     @EventHandler
@@ -37,10 +43,8 @@ public final class PlayerListener implements Listener {
 
     @EventHandler
     public void onJoin(final PlayerJoinEvent event) {
-        addUser(event.getPlayer());
-    }
+        final Player player = event.getPlayer();
 
-    private void addUser(final Player player) {
         // Grab the player data from the player
         final PlayerData playerData = OverflowAPI.INSTANCE.getPlayerDataManager().getData(player);
 
