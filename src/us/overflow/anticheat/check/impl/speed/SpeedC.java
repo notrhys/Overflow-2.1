@@ -27,7 +27,7 @@ public final class SpeedC extends PositionCheck {
 
         final double horizontalDistance = MathUtil.vectorDistance(from, to);
 
-        if ((getPlayerData().getClientTicks()) < 100 || positionManager.getTouchingClimbable().get() || positionManager.getTouchingIllegalBlocks().get() || positionManager.getTouchingHalfBlocks().get() || positionManager.getBelowBlocks().get()) {
+        if ((System.currentTimeMillis() - playerData.getLastUnknownTeleport()) < 1000L || (getPlayerData().getClientTicks()) < 100 || positionManager.getTouchingClimbable().get() || positionManager.getTouchingIllegalBlocks().get() || positionManager.getTouchingHalfBlocks().get() || positionManager.getBelowBlocks().get()) {
             return;
         }
 

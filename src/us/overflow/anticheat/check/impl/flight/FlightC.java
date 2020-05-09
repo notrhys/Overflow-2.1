@@ -28,7 +28,7 @@ public final class FlightC extends PositionCheck {
             if (blockAboveTicks > 0) blockAboveTicks--;
         }
 
-        if (blockAboveTicks > 0 || playerData.getVelocityManager().getMaxVertical() > 0.0 || playerData.getVelocityManager().getMaxHorizontal() > 0.0) {
+        if ((System.currentTimeMillis() - playerData.getLastUnknownTeleport()) < 1000L || getPlayerData().getPositionManager().getTouchingClimbable().get() || blockAboveTicks > 0 || playerData.getVelocityManager().getMaxVertical() > 0.0 || playerData.getVelocityManager().getMaxHorizontal() > 0.0) {
             hoverBuffer = 0;
             return;
         }
