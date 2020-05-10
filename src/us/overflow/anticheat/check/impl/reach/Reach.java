@@ -48,7 +48,7 @@ public final class Reach extends PacketCheck {
                 synchronized (targetData.getLocations()) {
                     final double reach = Math.sqrt(targetData.getLocations().stream().mapToDouble(d -> d.getDistanceSquared(playerPosition)).min().orElse(0.0));
 
-                    if (reach > 3.1 && reach < 5.f) {
+                    if (reach > 3.1 && reach < 6.f) {
                         if (++buffer > 2) {
                             this.handleViolation().addViolation(ViolationLevel.MEDIUM).create();
                         }
