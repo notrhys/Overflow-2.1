@@ -38,7 +38,7 @@ public final class InvalidA extends PacketCheck {
                         final boolean horizontallyAir = new Cuboid(playerLocation).expand(1.0, 0.0, 1.0).checkBlocks(playerLocation.getWorld(), material -> material == Material.AIR) && !playerData.getPositionManager().getTouchingClimbable().get();
 
                         if (horizontallyAir && horizontalDistance > 0.0 && horizontalDistance < 0.00089 && velocityDistance == 0.0 && standTicks == 0.0) {
-                            this.handleViolation().addViolation(ViolationLevel.MEDIUM).create();
+                            //this.handleViolation().addViolation(ViolationLevel.MEDIUM).create();
                         }
                     }
 
